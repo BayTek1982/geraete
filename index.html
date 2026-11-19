@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bayazit Geräte-Schule</title>
+<meta name="description" content="Geräte verstehen – Smartphone, Tablet, Laptop, PC, Smartwatch, Kopfhörer und Smart-TV: Technik, Software, Kaufen, Pflegen und Schützen. Lern-App mit kleinen Videos und Quiz.">
+<meta name="theme-color" content="#070b10">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#070b10;--bg2:#0b1119;--card:#0e1620;--card2:#121c28;--line:#1c2836;--tx:#e6edf5;--mut:#8796a8;--gold:#f5c542;--green:#22c55e;--red:#f43f5e;--blue:#3b82f6;--cv:#090f16;--grid:#121b26;
+--mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Mono",Menlo,Consolas,"Roboto Mono",monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color-scheme:dark}
+[data-theme=light]{--bg:#eef2f6;--bg2:#e6ebf1;--card:#ffffff;--card2:#f6f8fb;--line:#d6dee7;--tx:#0d1520;--mut:#566475;--gold:#b7860b;--green:#15803d;--red:#e11d48;--blue:#2563eb;--cv:#fbfcfe;--grid:#edf1f5;color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--tx);font-family:var(--sans);-webkit-text-size-adjust:100%}
+body{min-height:100vh;line-height:1.5}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+header.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top));background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:800;letter-spacing:.04em;font-size:15px;white-space:nowrap}
+.logo .dia{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;background:linear-gradient(135deg,#22d3ee,#a78bfa);color:#111;font-size:14px}
+.logo small{color:var(--mut);font-weight:600;font-size:10px;display:block;letter-spacing:.14em}
+.theme{margin-left:auto;display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.theme button{padding:7px 11px;font-size:14px;font-family:var(--mono);color:var(--mut);white-space:nowrap}
+.theme button span{display:none}@media (min-width:520px){.theme button span{display:inline}}
+.theme button.on{background:var(--card2);color:var(--tx);box-shadow:inset 0 -2px 0 #22d3ee}
+.layout{display:block;max-width:1240px;margin:0 auto}
+aside.side{display:none}
+main{padding:16px 14px 60px;max-width:860px;margin:0 auto}
+@media (min-width:900px){
+ .layout{display:grid;grid-template-columns:290px 1fr;gap:0}
+ aside.side{display:block;position:sticky;top:57px;height:calc(100vh - 57px);overflow:auto;border-right:1px solid var(--line);padding:14px}
+ main{padding:24px 28px 80px;width:100%}
+}
+.search{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--tx);font:inherit;font-size:14px;outline:none}
+.search:focus{border-color:#22d3ee}
+.sgrp{margin-top:14px}
+.sgrp h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ac);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.sgrp a{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;font-size:13.5px;color:var(--mut)}
+.sgrp a:hover{background:var(--card);color:var(--tx)}
+.sgrp a.act{background:var(--card2);color:var(--tx);box-shadow:inset 3px 0 0 var(--ac)}
+.sgrp a .ck{margin-left:auto;color:var(--green);font-size:12px}
+.side .sq{display:block;margin-top:16px;padding:10px;border-radius:10px;border:1px solid var(--line);font-family:var(--mono);font-size:12px;text-align:center;background:var(--card)}
+.hero{padding:6px 2px 16px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--mut)}
+.hero h1{font-family:var(--mono);font-size:30px;line-height:1.1;margin:6px 0 6px;letter-spacing:-.01em}
+.hero h1 span{background:linear-gradient(90deg,#22d3ee,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:15px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{font-family:var(--mono);font-size:11px;padding:5px 9px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--mut)}
+.chip b{color:var(--tx)}
+.bento{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tile{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;padding:16px;background:linear-gradient(160deg,color-mix(in srgb,var(--ac) 16%,var(--card)) 0%,var(--card) 60%);min-height:170px;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+.tile:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ac) 60%,var(--line))}
+.tile:first-child{grid-column:span 2}
+.tile::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:var(--ac);opacity:.10;filter:blur(8px)}
+.ti-top{display:flex;justify-content:space-between;align-items:flex-start}
+.ti-ico{font-size:40px;line-height:1}
+.ti-num{font-family:var(--mono);font-size:12px;color:var(--ac);font-weight:700;border:1px solid color-mix(in srgb,var(--ac) 50%,transparent);padding:2px 7px;border-radius:7px}
+.tile h2{font-family:var(--mono);font-size:15px;letter-spacing:.06em;margin-top:12px;color:var(--ac);line-height:1.25}
+.tile p{font-size:13px;color:var(--mut);margin-top:4px;flex:1}
+.prog{height:6px;border-radius:9px;background:color-mix(in srgb,var(--ac) 15%,var(--line));margin-top:12px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--ac);border-radius:9px}
+.ti-foot{font-family:var(--mono);font-size:11px;color:var(--mut);margin-top:6px;letter-spacing:.06em}
+@media (min-width:640px){.bento{grid-template-columns:repeat(3,1fr)}.tile:first-child{grid-column:span 2}.hero h1{font-size:38px}}
+.back{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--mut);padding:7px 11px;border:1px solid var(--line);border-radius:10px;background:var(--card);margin-bottom:14px}
+.back:hover{color:var(--tx)}
+.ahead{border:1px solid var(--line);border-radius:18px;padding:18px;background:linear-gradient(150deg,color-mix(in srgb,var(--ac) 18%,var(--card)),var(--card) 70%);margin-bottom:14px}
+.ahead .ti-ico{font-size:46px}
+.ahead h1{font-family:var(--mono);font-size:22px;color:var(--ac);margin-top:8px;letter-spacing:.03em}
+.ahead p{color:var(--mut);font-size:14px}
+.lgrid{display:grid;gap:10px}
+@media (min-width:640px){.lgrid{grid-template-columns:1fr 1fr}}
+.lcard{display:block;position:relative;border:1px solid var(--line);border-left:4px solid var(--ac);border-radius:14px;padding:13px 14px;background:var(--card)}
+.lcard:hover{background:var(--card2)}
+.lk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ac);font-weight:700}
+.lcard b{display:block;font-size:16px;margin-top:2px;padding-right:26px}
+.lcard .lsub{font-size:12.5px;color:var(--mut);margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lcard .done{position:absolute;right:12px;top:12px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:color-mix(in srgb,var(--green) 20%,transparent);color:var(--green);font-weight:800}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ac);font-weight:700}
+.ltitle{font-family:var(--mono);font-size:22px;margin:4px 0 12px;line-height:1.2}
+.player{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--cv)}
+.player canvas{display:block;width:100%;aspect-ratio:400/240;cursor:pointer}
+.cap{padding:12px 14px;border-top:1px solid var(--line);background:var(--card);min-height:86px}
+.cap .sn{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ac);font-weight:700}
+.cap p{font-size:15px;margin-top:3px}
+.ctrl{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card2);border-top:1px solid var(--line)}
+.pbtn{width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:var(--ac);color:#0b0f14;display:grid;place-items:center;font-size:16px;font-weight:900}
+input[type=range]{flex:1;accent-color:var(--ac);height:28px;min-width:0}
+.tm{font-family:var(--mono);font-size:11px;color:var(--mut);min-width:68px;text-align:right}
+.ctrl2{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 12px 12px;background:var(--card2)}
+.sbtn{font-family:var(--mono);font-size:12px;padding:6px 10px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--mut);min-width:34px}
+.sbtn.on{border-color:var(--ac);color:var(--tx);background:color-mix(in srgb,var(--ac) 18%,var(--card))}
+.ctrl2 .gap{flex:1}
+.info{display:grid;gap:10px;margin-top:14px}
+@media (min-width:640px){.info{grid-template-columns:1fr 1fr}}
+.ibox{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:14px;padding:12px 14px;background:var(--card)}
+.ibox h3{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--c);margin-bottom:4px}
+.ibox p{font-size:14px}
+.lnav{display:flex;gap:10px;margin-top:16px}
+.lnav a{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);font-size:13px}
+.lnav a small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--mut)}
+.lnav a.nx{text-align:right}
+.lnav a.dis{opacity:.35;pointer-events:none}
+.qcard{border:1px solid var(--line);border-radius:18px;padding:18px;background:var(--card)}
+.qtop{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mut)}
+.qbar{height:6px;border-radius:9px;background:var(--line);margin:8px 0 14px;overflow:hidden}
+.qbar i{display:block;height:100%;background:#f43f5e}
+.qq{font-size:18px;font-weight:650;margin-bottom:12px}
+.qimg{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:12px;background:var(--cv)}
+.qimg canvas{display:block;width:100%;aspect-ratio:400/240}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card2);font-size:15px}
+.opt:hover:not([disabled]){border-color:var(--mut)}
+.opt.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--card))}
+.opt.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 14%,var(--card))}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--card2);border:1px solid var(--line)}
+.fb b{font-family:var(--mono)}
+.fb .go{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--blue)}
+.big{display:block;width:100%;margin-top:14px;padding:13px;border-radius:12px;background:#f43f5e;color:#fff;font-family:var(--mono);font-weight:800;letter-spacing:.06em;text-align:center}
+.score{font-family:var(--mono);font-size:48px;font-weight:800;text-align:center;margin:8px 0}
+.rep a{display:block;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin-top:6px;background:var(--card2);font-size:14px}
+.foot{margin-top:28px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.08em}
+.tile.qz{grid-column:span 1}
+[data-theme=light] .tile h2,[data-theme=light] .ahead h1,[data-theme=light] .lk,[data-theme=light] .meta,[data-theme=light] .ti-num,[data-theme=light] .cap .sn,[data-theme=light] .sgrp h4{color:color-mix(in srgb,var(--ac) 68%,#000)}
+</style>
+</head>
+<body>
+<header class="top">
+ <a class="logo" href="#home"><span class="dia">📱</span><span>GERÄTE-SCHULE<small>BAYAZIT · LERN-APP</small></span></a>
+ <div class="theme" id="theme">
+  <button data-m="dark" title="Dunkel">☾<span> Dunkel</span></button><button data-m="light" title="Hell">☀<span> Hell</span></button><button data-m="auto" title="Automatisch">◐<span> Auto</span></button>
+ </div>
+</header>
+<div class="layout">
+ <aside class="side" id="side"></aside>
+ <main id="main"></main>
+</div>
+<script>
+"use strict";
+/* ============ Speicher ============ */
+const KEY='geraeteschule-v1';
+let ST={seen:{},best:0,runs:0};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)ST=Object.assign(ST,s);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));}catch(e){}}
+
+/* ============ Bereiche ============ */
+const AREAS=[
+ {id:'phone',name:'Das Smartphone',icon:'📱',col:'#22d3ee',desc:'Was im Handy steckt: Display, Touchscreen, Kamera und Sensoren.'},
+ {id:'geraete',name:'Tablet, Laptop & PC',icon:'💻',col:'#a78bfa',desc:'Tablet, Laptop, 2-in-1, Desktop-PC und E-Reader im Vergleich.'},
+ {id:'innen',name:'Technik im Inneren',icon:'🔬',col:'#f59e0b',desc:'Chip, Arbeitsspeicher, Speicher, Akku und Laden mit USB-C.'},
+ {id:'smart',name:'Wearables & Smart-Geräte',icon:'⌚',col:'#84cc16',desc:'Smartwatch, Fitness-Tracker, Kopfhörer, Smart-TV und Konsole.'},
+ {id:'software',name:'Software & Betriebssysteme',icon:'🧩',col:'#e879f9',desc:'Android, iOS, Windows, Apps, Updates, Cloud und Geräte verbinden.'},
+ {id:'praxis',name:'Kaufen, Pflegen & Schützen',icon:'🛡️',col:'#60a5fa',desc:'Das richtige Gerät finden, EU-Label lesen, Akku schonen, sichern und reparieren.'}
+];
+const QUIZCOL='#f43f5e';
+
+/* ============ Szenen-Bausteine (virtuell 400 × 240) ============ */
+const E=(ch,x,y,s=36,o={})=>({t:'emo',ch,x,y,s,...o});
+const P=(tx,x,y,c='a',o={})=>({t:'pill',tx,x,y,c,...o});
+const A=(x1,y1,x2,y2,c='mut',o={})=>({t:'arr',x1,y1,x2,y2,c,...o});
+const T=(tx,x,y,s=12,c='txt',b=0,o={})=>({t:'txt',tx,x,y,s,c,b,...o});
+const B=(x,y,w,h,c,tx='',o={})=>({t:'box',x,y,w,h,c,tx,...o});
+const BAR=(x,y,w,h,c,top,bot)=>({t:'bar',x,y,w,h,c,top,bot});
+const X=(x,y,s=18)=>({t:'x',x,y,s});
+const K=(x,y,s=18)=>({t:'chk',x,y,s});
+const LN=(pts,c='a',o={})=>({t:'line',pts,c,...o});
+const S=(say,add,clear=0)=>({say,add,clear});
+const D=(x,y,r=4,c='a',o={})=>({t:'dot',x,y,r,c,...o});
+const WV=(x1,x2,y,amp,len,c='a',o={})=>({t:'wave',x1,x2,y,amp,len,c,...o});
+const RAD=(x,y,n=3,gap=14,a0=-60,a1=60,c='a',o={})=>({t:'rad',x,y,n,gap,a0,a1,c,...o});
+const ARC=(cx,cy,rx,ry,a0,a1,n=36)=>Array.from({length:n+1},(_,i)=>{const a=a0+(a1-a0)*i/n;return[cx+Math.cos(a)*rx,cy+Math.sin(a)*ry];});
+const PI=Math.PI;
+/* Geräte-Bausteine */
+const PH=(x,y,s=1,o={})=>({t:'phone',x,y,s,...o});
+const TB=(x,y,s=1,o={})=>({t:'tablet',x,y,s,...o});
+const LP=(x,y,s=1,o={})=>({t:'laptop',x,y,s,...o});
+const WT=(x,y,s=1,o={})=>({t:'watch',x,y,s,...o});
+const CH=(x,y,w,h,tx='',c='a')=>({t:'chip',x,y,w,h,tx,c});
+const BT=(x,y,w,h,lv,o={})=>({t:'bat',x,y,w,h,lv,...o});
+const RGB=(x,y,s,on=[1,1,1])=>({t:'rgb',x,y,s,on});
+const CAP=(x,y,r,up)=>({t:'cap',x,y,r,up});
+const OLED=[[1,1,0,1,1,1,0,1],[1,0,0,1,1,0,0,1],[1,1,1,1,0,0,1,1],[0,1,1,1,0,1,1,0]];
+const LABEL=['#16a34a','#4ade80','#a3e635','#facc15','#fb923c','#f97316','#ef4444'];
+
+/* ============ Lektionen ============ */
+const L=[
+/* ---------- DAS SMARTPHONE ---------- */
+{id:'aufbau',a:'phone',t:'Was steckt im Smartphone?',steps:[
+ S('Ein Smartphone ist ein kompletter Computer im Hosentaschenformat – mit Bildschirm, Chip, Speicher, Akku, Kameras und vielen Funkchips.',[PH(200,128,3),P('COMPUTER FÜR DIE TASCHE',200,24,'a')]),
+ S('Öffnet man es, sieht man: Der größte Teil ist der Akku. Darüber sitzt die Hauptplatine mit dem Chip, ganz oben die Kameras.',[B(130,30,140,185,'mut','',{fa:.08}),D(150,38,4,'txt'),D(162,38,4,'txt'),B(145,46,110,44,'blue','PLATINE',{fa:.22}),CH(200,74,34,14,'','gold'),B(145,98,110,106,'green','AKKU',{fa:.22}),P('CHIP',330,74,'gold'),A(300,74,222,74,'gold'),P('KAMERAS',70,38,'a'),A(105,38,142,38,'a')],1),
+ S('Dazu kommen Lautsprecher, Mikrofone, ein Vibrationsmotor, die SIM-Halterung und unten der USB-C-Anschluss.',[P('LAUTSPRECHER',62,200,'gold'),P('MIKROFONE',70,150,'blue'),P('VIBRATION',330,150,'red'),P('SIM',330,110,'mut'),P('USB-C',200,228,'gold')]),
+ S('In einem Handy steckt heute millionenfach mehr Rechenleistung als im Computer, mit dem 1969 die Mondlandung gesteuert wurde.',[E('🚀',90,100,50),T('1969',90,155,14,'mut',1),T('<',200,100,30,'mut',1),PH(310,100,1.6),T('heute',310,155,14,'a',1),P('MILLIONENFACH SCHNELLER',200,205,'gold')],1)
+],info:{was:'Ein Smartphone vereint Telefon, Computer, Kamera, Navi, Musikspieler und Geldbörse in einem Gerät.',so:'Wichtige Bauteile: Display, Chip (SoC), Arbeitsspeicher, Speicher, Akku, Kameras, Sensoren und Funkchips für Mobilfunk, WLAN, Bluetooth, NFC und GPS.',bed:'Weil alles so dicht gepackt ist, sind viele Bauteile verklebt – das macht Reparaturen schwieriger und teurer.',tipp:'Tippe in der Telefon-App *#06# ein: Dann siehst du die IMEI, die Seriennummer deines Handys. Notiere sie für den Fall eines Diebstahls.'}},
+
+{id:'display',a:'phone',t:'Das Display: LCD & OLED',steps:[
+ S('Ein Display besteht aus Millionen winziger Bildpunkte, den Pixeln. Jeder Pixel hat drei Unterpixel: Rot, Grün und Blau.',[RGB(200,55,26),P('1 PIXEL = ROT + GRÜN + BLAU',200,175,'a')]),
+ S('Durch unterschiedlich helles Leuchten mischen sie jede Farbe: Rot und Grün ergeben Gelb, alle drei zusammen ergeben Weiß.',[RGB(110,55,22,[1,1,0]),T('= GELB',110,145,14,'gold',1),RGB(290,55,22,[1,1,1]),T('= WEISS',290,145,14,'txt',1),P('FARBEN MISCHEN',200,200,'a')],1),
+ S('LCD: Eine Hintergrundbeleuchtung leuchtet immer. Flüssigkristalle wirken wie Jalousien und lassen mehr oder weniger Licht durch – echtes Schwarz ist schwer.',[P('LCD',200,36,'blue'),T('offen',105,92,10,'mut',1),T('halb',200,92,10,'mut',1),T('zu',295,92,10,'mut',1),B(60,105,90,32,'mut','',{fa:.08}),B(155,105,90,32,'mut','',{fa:.45}),B(250,105,90,32,'mut','',{fa:.85}),B(60,160,280,18,'gold','',{fa:.55}),T('Hintergrundlicht – immer an',200,198,11,'gold',1)],1),
+ S('OLED: Jeder Pixel leuchtet selbst. Ein schwarzer Pixel ist einfach aus – das ergibt perfektes Schwarz, starke Kontraste und spart bei dunklen Bildern Strom.',[P('OLED · JEDER PIXEL IST EINE LAMPE',200,34,'green'),...OLED.flatMap((r,j)=>r.map((v,i)=>D(95+i*30,80+j*28,9,v?'a':'line'))),T('aus = echtes Schwarz',200,212,12,'mut',1)],1)
+],info:{was:'Das Display zeigt das Bild und ist bei Smartphones und Tablets zugleich die wichtigste Bedienfläche.',so:'LCD: günstiger, mit Hintergrundbeleuchtung. OLED/AMOLED: jeder Pixel leuchtet selbst, tiefes Schwarz. Wichtige Werte: Auflösung, Helligkeit (in Nits) und Bildwiederholrate (60 oder 120 Hz).',bed:'120 Hz bedeutet: Das Bild wird 120-mal pro Sekunde neu gezeichnet. Scrollen wirkt dadurch flüssiger, kostet aber etwas mehr Akku.',tipp:'Bei OLED-Displays spart der Dunkelmodus spürbar Akku – bei LCD-Displays bringt er dafür kaum etwas.'}},
+
+{id:'touch',a:'phone',t:'Der Touchscreen',steps:[
+ S('Unter dem Glas liegt ein unsichtbares Gitter aus hauchdünnen Leiterbahnen – in Reihen und Spalten.',[...[0,1,2,3,4,5].map(i=>LN([[100,55+i*26],[300,55+i*26]],'a',{w:1})),...[0,1,2,3,4,5,6,7,8].map(i=>LN([[105+i*24,48],[105+i*24,192]],'a',{w:1})),P('UNSICHTBARES GITTER',200,220,'a')]),
+ S('Dein Finger leitet ein wenig Strom. Berührst du das Glas, verändert sich an dieser Stelle das elektrische Feld – genauer: die Kapazität.',[RAD(225,107,3,10,0,360,'gold'),D(225,107,6,'gold'),E('👆',238,150,40),P('KAPAZITIV',330,30,'gold')]),
+ S('Ein Chip misst das Gitter über 100-mal pro Sekunde und berechnet daraus genau, wo und wie viele Finger das Display berühren.',[LN([[100,107],[300,107]],'red',{w:2.5}),LN([[225,48],[225,192]],'red',{w:2.5}),P('POSITION: REIHE × SPALTE',140,30,'red')]),
+ S('Ein normaler Handschuh funktioniert deshalb nicht: Stoff leitet keinen Strom. Touch-Handschuhe haben leitfähige Fäden in den Fingerspitzen.',[E('🧤',110,100,54),X(110,100,24),T('normaler Handschuh',110,165,12,'txt',1),E('🧤',290,100,54),K(320,75,13),T('Touch-Handschuh',290,165,12,'txt',1)],1)
+],info:{was:'Ein Touchscreen erkennt Berührungen. In Smartphones und Tablets steckt fast immer ein kapazitiver Touchscreen.',so:'Er reagiert auf leitfähige Dinge wie Finger oder spezielle Eingabestifte. Mehrere Finger gleichzeitig (Multitouch) ermöglichen Zoomen und Drehen.',bed:'Auch Wassertropfen leiten Strom – darum reagiert der Touchscreen manchmal falsch, wenn das Display nass ist.',tipp:'Bei einem dicken Schutzglas hilft es manchmal, in den Einstellungen die Touch-Empfindlichkeit zu erhöhen (bei Samsung unter Anzeige).'}},
+
+{id:'kamera',a:'phone',t:'Die Handykamera',steps:[
+ S('Licht fällt durch ein winziges Objektiv auf den Bildsensor. Der Sensor hat Millionen lichtempfindlicher Punkte – 50 Megapixel sind 50 Millionen davon.',[E('☀️',50,60,34),LN([[70,75],[175,120]],'gold',{w:2,dash:1}),B(175,95,24,50,'blue','',{fa:.35}),LN([[199,120],[280,120]],'gold',{w:2,dash:1}),B(280,80,70,80,'a','SENSOR',{fa:.2}),T('Objektiv',187,165,11,'blue',1),P('50 MP = 50 MIO. PUNKTE',200,210,'a')]),
+ S('Beim Auslösen macht das Handy oft gleich mehrere Fotos und verrechnet sie blitzschnell zu einem Bild – das nennt man computergestützte Fotografie.',[B(40,70,70,52,'mut','',{fa:.15}),B(54,82,70,52,'mut','',{fa:.15}),B(68,94,70,52,'mut','',{fa:.2}),A(150,120,205,120,'a'),CH(240,120,44,30,'KI'),A(275,120,315,120,'a'),B(320,92,60,56,'green','FOTO',{fa:.25}),P('MEHRERE BILDER → EIN FOTO',200,205,'a')],1),
+ S('So gelingen auch Nachtfotos: Viele Aufnahmen werden übereinandergelegt, das Rauschen verschwindet und das Bild wird heller.',[E('🌙',80,100,44),T('1 Bild: dunkel, verrauscht',240,80,12,'mut',1),T('10 Bilder: hell und klar',240,118,12,'green',1),P('NACHTMODUS',240,168,'gold')],1),
+ S('Zoom: Der optische Zoom nutzt eine eigene Tele-Linse und bleibt scharf. Der digitale Zoom schneidet nur einen Ausschnitt heraus – das Bild wird unschärfer.',[P('OPTISCH · TELE-LINSE',110,70,'green'),K(110,112,14),T('bleibt scharf',110,150,12,'txt',1),P('DIGITAL · AUSSCHNITT',290,70,'red'),X(290,112,12),T('wird unscharf',290,150,12,'txt',1)],1)
+],info:{was:'Handykameras sind winzig, liefern aber dank starker Chips und cleverer Software sehr gute Fotos.',so:'Meist gibt es mehrere Kameras: Hauptkamera, Ultraweitwinkel, Tele für den Zoom und vorne die Selfie-Kamera. Angaben wie „3×“ nennen die Vergrößerung.',bed:'Mehr Megapixel bedeuten nicht automatisch bessere Fotos – Sensorgröße, Objektiv und Software sind mindestens genauso wichtig.',tipp:'Wische vor dem Fotografieren mit einem weichen Tuch über die Linse – ein Fettfilm vom Finger ist die häufigste Ursache für milchige Bilder.'}},
+
+{id:'sensoren',a:'phone',t:'Sensoren im Handy',steps:[
+ S('Ein Beschleunigungssensor spürt jede Bewegung. Drehst du das Handy, dreht sich das Bild mit – und nebenbei zählt er deine Schritte.',[P('BESCHLEUNIGUNGSSENSOR',200,28,'a'),PH(110,125,1.8),A(160,125,225,125,'a'),PH(300,125,1.8,{land:1}),T('+ Schrittzähler',200,212,12,'mut',1)]),
+ S('Das Gyroskop misst Drehungen, der Magnetsensor das Magnetfeld der Erde. Zusammen ergeben sie einen Kompass, den das Navi braucht.',[E('🧭',200,100,60),P('GYROSKOP',85,60,'gold'),P('MAGNETSENSOR',315,60,'blue'),P('KOMPASS FÜRS NAVI',200,178,'a')],1),
+ S('Der Näherungssensor schaltet beim Telefonieren am Ohr das Display aus. Der Helligkeitssensor passt die Helligkeit an das Umgebungslicht an.',[E('👂',80,100,50),PH(140,105,1.3),P('DISPLAY AUS',110,170,'red'),E('💡',290,90,44),P('AUTO-HELLIGKEIT',290,150,'gold')],1),
+ S('Dazu kommen Fingerabdrucksensor und Barometer. Das Barometer misst den Luftdruck – daraus erkennt das Handy sogar, ob du Treppen steigst.',[E('☝️',110,95,50),T('Fingerabdruck',110,155,12,'txt',1),E('🏢',290,95,50),T('Barometer: Höhe',290,155,12,'txt',1)],1)
+],info:{was:'Sensoren sind kleine Messfühler. Sie sagen dem Handy, wie es bewegt wird, wo es ist und was um es herum passiert.',so:'Wichtige Sensoren: Beschleunigung, Gyroskop, Magnetfeld, Näherung, Helligkeit, Luftdruck (Barometer) und Fingerabdruck – dazu GPS für den Standort.',bed:'Fitness-Apps, Navi, Spiele, automatisches Drehen und das Abschalten des Displays beim Telefonieren funktionieren nur dank dieser Sensoren.',tipp:'Zeigt der Kompass im Navi falsch an, hilft oft eine Kalibrierung: Das Handy ein paarmal in Form einer liegenden Acht durch die Luft bewegen.'}},
+
+/* ---------- TABLET, LAPTOP & PC ---------- */
+{id:'tablet',a:'geraete',t:'Das Tablet',steps:[
+ S('Ein Tablet ist wie ein großes Smartphone: flach, mit Touchscreen, aber mit einem Bildschirm von etwa 8 bis 13 Zoll.',[PH(110,128,1.6),T('6–7 Zoll',110,206,12,'mut',1),TB(270,118,1.9),T('8–13 Zoll',270,206,12,'a',1)]),
+ S('Zoll ist ein Längenmaß: 1 Zoll = 2,54 cm. Gemessen wird die Bildschirmdiagonale – von Ecke zu Ecke.',[TB(135,120,1.9,{land:1}),A(72,168,198,72,'gold',{bi:1}),T('1 Zoll = 2,54 cm',305,85,14,'gold',1),T('11 Zoll ≈ 28 cm',305,122,14,'txt',1),P('DIAGONALE',305,168,'gold')],1),
+ S('Tablets sind ideal zum Lesen, für Videos, zum Zeichnen mit Stift und für Videoanrufe. Mit Hülle und Tastatur geht auch einfaches Arbeiten.',[E('📖',65,95,38),E('🎬',155,95,38),E('✏️',245,95,38),E('📞',335,95,38),T('Lesen',65,145,12,'txt',1),T('Videos',155,145,12,'txt',1),T('Zeichnen',245,145,12,'txt',1),T('Anrufe',335,145,12,'txt',1)],1),
+ S('Tablets gibt es nur mit WLAN oder zusätzlich mit Mobilfunk (LTE/5G). Mit SIM-Karte bist du auch unterwegs online.',[TB(120,125,1.4),P('NUR WLAN',120,212,'blue'),TB(280,125,1.4),RAD(280,58,3,10,-150,-30,'green'),P('WLAN + 5G',280,212,'green')],1)
+],info:{was:'Ein Tablet ist ein flacher Computer ohne feste Tastatur, der komplett über den Touchscreen bedient wird.',so:'Gängige Systeme: iPadOS (Apple iPad) und Android (z. B. Samsung Galaxy Tab). Manche 2-in-1-Geräte laufen mit Windows.',bed:'Für Surfen, Lesen und Streaming reicht ein Tablet oft völlig. Für lange Texte, Tabellen und viele Fenster ist ein Laptop praktischer.',tipp:'Für Kinder gibt es in den Einstellungen Schutzfunktionen wie Bildschirmzeit, App-Freigaben und Altersfilter.'}},
+
+{id:'laptop',a:'geraete',t:'Der Laptop',steps:[
+ S('Ein Laptop (auch Notebook) ist ein tragbarer Computer: Bildschirm, Tastatur, Touchpad und Akku in einem klappbaren Gehäuse.',[LP(200,150,1.8),P('ALLES IN EINEM',200,205,'a')]),
+ S('Typische Größen sind 13 bis 16 Zoll. Leichte Geräte wiegen gut 1 Kilogramm, große Arbeits- und Gaming-Laptops 2 bis 3 Kilogramm.',[LP(105,140,1.05),T('13 Zoll · ca. 1,2 kg',105,180,11,'txt',1),LP(285,140,1.5),T('16 Zoll · 2–3 kg',285,180,11,'txt',1)],1),
+ S('Anschlüsse: USB-C (auch zum Laden), USB-A, HDMI für Monitor oder Fernseher, die Kopfhörerbuchse und manchmal ein Kartenleser.',[B(30,90,340,50,'mut','',{fa:.1}),P('USB-C',75,115,'a'),P('USB-A',150,115,'blue'),P('HDMI',222,115,'gold'),P('KLINKE',298,115,'green'),T('Seitenansicht',200,165,11,'mut',1)],1),
+ S('Seit dem 28. April 2026 müssen neue Laptops in der EU per USB-C geladen werden können. Ein Ladegerät liegt deshalb nicht mehr immer bei.',[T('USB-C-PFLICHT',200,70,22,'a',1),P('SEIT 28.04.2026 · EU',200,120,'gold'),T('Ladegerät oft separat',200,165,13,'mut',1)],1)
+],info:{was:'Ein Laptop ist ein vollwertiger Computer zum Mitnehmen – mit Windows, macOS, ChromeOS oder Linux.',so:'Wichtige Werte: Prozessor, Arbeitsspeicher (16 GB sind heute ein guter Standard), SSD-Größe, Display (Größe, Auflösung, matt oder glänzend), Akkulaufzeit und Gewicht.',bed:'Für die meisten Menschen ersetzt ein Laptop den großen PC. Nur für sehr viel Leistung (Spiele, Videoschnitt) ist ein Desktop-PC oft stärker und günstiger.',tipp:'Ein matter Bildschirm spiegelt weniger – gut fürs Arbeiten am Fenster oder draußen.'}},
+
+{id:'zweiin1',a:'geraete',t:'2-in-1 & Convertible',steps:[
+ S('Ein 2-in-1 ist Laptop und Tablet in einem Gerät. Es hat einen Touchscreen und oft einen Stift.',[LP(110,140,1.2),T('+',200,110,28,'mut',1),TB(290,110,1.5,{land:1}),P('2-IN-1',200,205,'a')]),
+ S('Convertible: Das Scharnier lässt sich um 360 Grad drehen. Klappst du den Bildschirm ganz nach hinten, wird daraus ein Tablet.',[LP(130,170,1.2),LN(ARC(130,170,100,100,PI,2*PI),'gold',{w:2,dash:1}),P('360°-SCHARNIER',315,110,'gold'),T('Laptop → Zelt → Tablet',200,218,11,'mut',1)],1),
+ S('Detachable: Die Tastatur ist abnehmbar und wird meist magnetisch angesteckt. Ohne Tastatur ist das Gerät ein leichtes Tablet.',[TB(200,85,1.5,{land:1}),B(140,145,120,28,'mut','TASTATUR',{fa:.2}),A(200,180,200,198,'a'),P('MAGNETISCH ABNEHMBAR',200,218,'a')],1),
+ S('Mit dem Stift schreibst du Notizen von Hand, zeichnest oder unterschreibst Dokumente – der Stift erkennt sogar, wie fest du drückst.',[TB(160,115,1.8,{land:1}),LN([[110,135],[130,105],[150,132],[170,102],[190,128]],'a',{w:2.5}),E('🖊️',215,100,30),P('DRUCKEMPFINDLICH',310,200,'a')],1)
+],info:{was:'2-in-1-Geräte verbinden die Tastatur eines Laptops mit dem Touchscreen eines Tablets.',so:'Zwei Bauarten: Convertible (Scharnier um 360° drehbar) und Detachable (Tastatur abnehmbar). Meist mit Windows, manchmal mit Android oder iPadOS.',bed:'Praktisch für Schule, Studium und Außendienst: tippen, zeichnen, präsentieren und auf dem Sofa lesen – alles mit einem Gerät.',tipp:'Prüfe, ob Stift und Tastatur im Preis enthalten sind – oft kosten sie extra.'}},
+
+{id:'pc',a:'geraete',t:'Desktop-PC & All-in-One',steps:[
+ S('Ein Desktop-PC steht fest auf oder unter dem Schreibtisch: Gehäuse (Tower), Bildschirm, Tastatur und Maus sind einzelne Teile.',[E('🖥️',150,95,70),E('⌨️',150,180,36),B(275,50,60,125,'mut','TOWER',{fa:.15}),E('🖱️',230,190,24)]),
+ S('Vorteil: Im großen Gehäuse ist viel Platz für starke Bauteile und Kühlung. Einzelne Teile lassen sich später austauschen oder aufrüsten.',[B(105,35,190,180,'mut','',{fa:.06}),B(120,55,80,45,'gold','CPU',{fa:.3}),B(210,55,70,45,'blue','RAM',{fa:.3}),B(120,110,160,35,'red','GRAFIKKARTE',{fa:.3}),B(120,155,65,45,'green','SSD',{fa:.3}),B(195,155,85,45,'mut','NETZTEIL',{fa:.3}),P('AUFRÜSTBAR',350,40,'a')],1),
+ S('Ein All-in-One-PC steckt die ganze Technik in den Bildschirm. Das spart Platz und Kabel, lässt sich aber kaum aufrüsten.',[E('🖥️',200,100,90),P('TECHNIK IM BILDSCHIRM',200,192,'a')],1),
+ S('Mini-PCs sind kaum größer als ein Buch, leise und sparsam – genug für Büro, Internet und Mediathek.',[B(130,90,110,50,'mut','MINI-PC',{fa:.15}),E('📕',310,115,44),T('≈ so groß wie ein Buch',200,185,12,'mut',1)],1)
+],info:{was:'Ein Desktop-PC ist ein stationärer Computer mit getrennten Bauteilen – meist der leistungsstärkste und am besten erweiterbare Gerätetyp.',so:'Bauformen: Tower (groß, aufrüstbar), All-in-One (Technik im Bildschirm) und Mini-PC (klein, sparsam).',bed:'Für Spiele, Videoschnitt, 3D und mehrere Monitore ist ein Desktop-PC bei gleichem Preis meist stärker als ein Laptop.',tipp:'Einen Laptop kannst du zu Hause wie einen PC nutzen: Monitor, Tastatur und Maus über ein USB-C-Dock mit nur einem Kabel anschließen.'}},
+
+{id:'ereader',a:'geraete',t:'E-Reader & E-Ink',steps:[
+ S('Ein E-Reader ist ein Lesegerät für elektronische Bücher. Sein Bildschirm sieht aus wie bedrucktes Papier: E-Ink, elektronische Tinte.',[TB(200,118,1.8,{c:'mut'}),...[0,1,2,3,4,5].map(i=>LN([[163,70+i*18],[i===5?210:237,70+i*18]],'mut',{w:2.2})),P('E-INK',325,60,'a')]),
+ S('Im Display stecken winzige Kapseln mit schwarzen und weißen Teilchen. Elektrische Spannung zieht entweder die weißen oder die schwarzen nach oben.',[P('MIKROKAPSELN',200,36,'a'),CAP(80,115,24,'w'),CAP(140,115,24,'b'),CAP(200,115,24,'w'),CAP(260,115,24,'b'),CAP(320,115,24,'w'),T('weiß oben = hell · schwarz oben = dunkel',200,182,11,'mut',1)],1),
+ S('Strom braucht E-Ink nur beim Umblättern. Danach bleibt das Bild ohne Energie stehen – darum hält der Akku mehrere Wochen.',[BT(200,95,130,54,.9),T('mehrere Wochen',200,160,18,'green',1),P('STROM NUR BEIM UMBLÄTTERN',200,205,'a')],1),
+ S('E-Ink spiegelt kaum und ist auch in praller Sonne gut lesbar. Für abends gibt es ein Frontlicht, das die Seite sanft von vorne beleuchtet.',[E('☀️',80,90,44),T('in der Sonne',80,145,11,'txt',1),E('📖',200,95,50),E('🌙',320,90,40),T('abends: Frontlicht',320,145,11,'txt',1)],1)
+],info:{was:'E-Reader sind spezialisierte Lesegeräte mit E-Ink-Display, die sich fast wie Papier lesen.',so:'E-Books kauft man digital oder leiht sie aus. Bekannte Geräte: Kindle, tolino und Kobo.',bed:'E-Ink flimmert nicht und strahlt kein grelles Licht aus – langes Lesen ist dadurch angenehmer als auf Handy oder Tablet.',tipp:'Mit einem Büchereiausweis kannst du über die Onleihe deiner Stadtbücherei E-Books ausleihen – auf tolino-Geräten sogar direkt am Gerät.'}},
+
+/* ---------- TECHNIK IM INNEREN ---------- */
+{id:'soc',a:'innen',t:'Der Chip: SoC & Prozessor',steps:[
+ S('Das Herz jedes Geräts ist der Chip. Im Smartphone ist fast alles auf einem einzigen Chip vereint – dem System on a Chip, kurz SoC.',[CH(200,110,140,100,'SoC'),P('SYSTEM ON A CHIP',200,212,'a')]),
+ S('Darin stecken: die CPU (rechnet allgemein), die GPU (Grafik und Spiele), die NPU (künstliche Intelligenz) und das Modem für den Mobilfunk.',[CH(200,115,200,130,''),B(112,62,85,50,'gold','CPU',{fa:.3}),B(203,62,85,50,'red','GPU',{fa:.3}),B(112,118,85,50,'green','NPU · KI',{fa:.3}),B(203,118,85,50,'blue','MODEM',{fa:.3})],1),
+ S('Ein moderner Chip hat viele Milliarden Transistoren – winzige Schalter von nur wenigen Nanometern. Ein Haar ist 50.000 bis 100.000 Nanometer dick.',[T('Milliarden',200,60,26,'gold',1),T('Transistoren auf einem Fingernagel',200,95,12,'mut',1),P('STRUKTUREN: WENIGE NANOMETER',200,140,'a'),T('Haar ≈ 50.000–100.000 nm',200,185,13,'txt',1)],1),
+ S('Mehr Kerne heißt: mehr Aufgaben gleichzeitig. Moderne Chips mischen starke Leistungskerne und sparsame Effizienzkerne, um Akku zu sparen.',[B(70,70,70,70,'gold','STARK',{fa:.3}),B(150,70,70,70,'gold','STARK',{fa:.3}),...[0,1,2,3,4,5].map(i=>B(250+(i%3)*40,70+Math.floor(i/3)*38,32,32,'green','',{fa:.3})),T('Leistungskerne',145,160,11,'gold',1),T('Effizienzkerne',306,160,11,'green',1),P('8 KERNE',200,205,'a')],1)
+],info:{was:'Der Prozessor (CPU) führt die Befehle von Apps und Betriebssystem aus. Beim Smartphone sitzt er zusammen mit Grafik, KI-Einheit und Modem auf dem SoC.',so:'Bekannte Handy-Chips: Apple A-Serie, Qualcomm Snapdragon, Samsung Exynos, Google Tensor, MediaTek Dimensity. In Laptops: Intel, AMD, Apple M-Serie und Snapdragon X.',bed:'Ein moderner Chip hält ein Gerät länger aktuell und arbeitet sparsamer – das verlängert die Akkulaufzeit.',tipp:'Für den Alltag (WhatsApp, Surfen, Fotos) reicht ein Mittelklasse-Chip völlig. Ein Spitzen-Chip lohnt sich vor allem für Spiele, Videoschnitt und KI-Funktionen.'}},
+
+{id:'ram',a:'innen',t:'Arbeitsspeicher (RAM)',steps:[
+ S('Der Arbeitsspeicher (RAM) ist wie ein Schreibtisch: Alles, woran gerade gearbeitet wird, liegt dort griffbereit.',[E('🧑‍💻',100,110,56),B(180,80,180,60,'blue','RAM = SCHREIBTISCH',{fa:.2}),T('schnell griffbereit',270,120,12,'txt',1)]),
+ S('Der Speicher ist dagegen der Aktenschrank: groß, aber langsamer. Öffnest du eine App, wird sie vom Schrank auf den Schreibtisch geholt.',[B(40,60,110,130,'gold','SPEICHER',{fa:.2}),T('Aktenschrank · groß',95,205,11,'gold',1),A(160,125,235,125,'a'),B(245,80,120,90,'blue','RAM',{fa:.2}),T('Schreibtisch · schnell',305,205,11,'blue',1)],1),
+ S('Ist der Schreibtisch voll, muss das Gerät Apps schließen und später neu laden. Mehr RAM heißt: Mehr Apps bleiben gleichzeitig offen.',[B(60,55,280,105,'blue','RAM',{fa:.1}),B(75,82,55,58,'a','APP',{fa:.3}),B(140,82,55,58,'a','APP',{fa:.3}),B(205,82,55,58,'a','APP',{fa:.3}),B(270,82,55,58,'red','VOLL',{fa:.3}),P('VOLL → APPS WERDEN GESCHLOSSEN',200,195,'red')],1),
+ S('RAM vergisst alles, sobald der Strom weg ist. Handys haben heute meist 8 bis 12 GB, für Laptops sind 16 GB ein guter Standard.',[P('HANDY: 8–12 GB',200,60,'a'),P('LAPTOP: 16 GB',200,105,'gold'),P('PROFI / SPIELE: 32 GB+',200,150,'green'),T('Strom weg = RAM leer',200,200,11,'mut',1)],1)
+],info:{was:'RAM (Random Access Memory) ist der schnelle Arbeitsspeicher. Er hält Daten nur, solange das Gerät eingeschaltet ist.',so:'Die Angabe erfolgt in Gigabyte (GB). Betriebssystem und jede geöffnete App belegen einen Teil davon.',bed:'Zu wenig RAM merkt man daran, dass Apps beim Wechseln neu laden und das Gerät stockt.',tipp:'Beim Kauf lieber etwas mehr RAM nehmen – bei Handys und vielen Laptops ist er fest verlötet und lässt sich später nicht erweitern.'}},
+
+{id:'speicher',a:'innen',t:'Speicher: SSD & Flash',steps:[
+ S('Fotos, Apps und Musik liegen im Speicher. In Handys und modernen Laptops ist das Flash-Speicher – ganz ohne bewegliche Teile.',[CH(200,105,150,70,'FLASH'),P('KEINE BEWEGLICHEN TEILE',200,200,'a')]),
+ S('Früher drehte sich im Computer eine Festplatte (HDD) mit Magnetscheiben. Eine SSD ist viele Male schneller, leiser und stoßfester.',[D(110,112,48,'mut'),D(110,112,40,'card'),D(110,112,7,'mut'),LN([[150,70],[125,110]],'txt',{w:3}),T('HDD · dreht sich',110,190,12,'mut',1),CH(290,112,100,60,'SSD'),T('SSD · viel schneller',290,190,12,'green',1)],1),
+ S('Was braucht wie viel Platz? Ein Foto etwa 3 bis 5 MB, ein Lied 3 bis 10 MB, eine Minute 4K-Video 200 bis 400 MB, ein großes Spiel viele Gigabyte.',[T('Foto',50,55,13,'txt',1,{al:'left'}),T('3–5 MB',350,55,13,'gold',1,{al:'right'}),T('Lied (MP3)',50,95,13,'txt',1,{al:'left'}),T('3–10 MB',350,95,13,'gold',1,{al:'right'}),T('1 Min. 4K-Video',50,135,13,'txt',1,{al:'left'}),T('200–400 MB',350,135,13,'gold',1,{al:'right'}),T('Großes Spiel',50,175,13,'txt',1,{al:'left'}),T('50–150 GB',350,175,13,'red',1,{al:'right'})],1),
+ S('Achtung: Ein Teil des Speichers ist schon vom Betriebssystem belegt. Von 128 GB bleiben oft nur rund 100 bis 115 GB für dich frei.',[B(40,90,320,42,'mut','',{fa:.08}),B(40,90,62,42,'red','SYSTEM',{fa:.35}),T('frei für dich',230,111,12,'txt',1),T('128 GB',200,160,14,'txt',1),P('SYSTEM BELEGT PLATZ',200,205,'gold')],1)
+],info:{was:'Der Speicher (Flash oder SSD) behält Daten dauerhaft – auch ohne Strom.',so:'Übliche Größen: Handy 128 bis 512 GB, Laptop 512 GB bis 1 TB. 1 TB = 1.000 GB.',bed:'Ist der Speicher fast voll, wird das Gerät langsamer und Updates scheitern. Manche Android-Handys haben noch einen Steckplatz für eine microSD-Karte.',tipp:'Fotos und Videos automatisch in die Cloud oder auf eine externe SSD sichern – so schaffst du Platz auf dem Handy, ohne etwas zu verlieren.'}},
+
+{id:'akku',a:'innen',t:'Der Akku: Lithium-Ionen',steps:[
+ S('Fast alle Geräte haben einen Lithium-Ionen-Akku. Er hat zwei Seiten: die Anode (Minuspol) und die Kathode (Pluspol).',[B(60,60,120,120,'blue','ANODE −',{fa:.2}),B(220,60,120,120,'red','KATHODE +',{fa:.2}),LN([[200,55],[200,185]],'mut',{w:2,dash:1}),T('Trennschicht',200,205,11,'mut',1)]),
+ S('Beim Laden wandern Lithium-Ionen zur Anode und werden dort eingelagert – so wie man Wasser bergauf in einen Speichersee pumpt.',[P('LADEN: IONEN → ANODE',200,30,'green'),D(120,100,6,'gold',{f:[280,100]}),D(100,130,6,'gold',{f:[260,130]}),D(140,155,6,'gold',{f:[300,155]}),D(155,115,6,'gold',{f:[315,115]})]),
+ S('Beim Benutzen wandern sie zurück zur Kathode. Dabei fließen außen Elektronen durch dein Gerät – das ist der Strom.',[B(60,60,120,120,'blue','ANODE −',{fa:.2}),B(220,60,120,120,'red','KATHODE +',{fa:.2}),LN([[200,55],[200,185]],'mut',{w:2,dash:1}),D(280,100,6,'gold',{f:[120,100]}),D(260,130,6,'gold',{f:[100,130]}),D(300,155,6,'gold',{f:[140,155]}),LN([[120,60],[120,30],[280,30],[280,60]],'gold',{w:2}),E('💡',200,30,24),P('ENTLADEN: STROM FÜRS GERÄT',200,212,'gold')],1),
+ S('Die Kapazität steht meist in mAh. Wirklich vergleichbar ist die Energie in Wattstunden: 5.000 mAh × 3,85 V ≈ 19 Wh.',[BT(200,80,140,60,.75),T('5.000 mAh × 3,85 V',200,150,15,'txt',1),P('≈ 19 Wh',200,192,'gold')],1)
+],info:{was:'Ein Akku ist ein wiederaufladbarer Energiespeicher. Lithium-Ionen-Akkus sind leicht und speichern viel Energie auf kleinem Raum.',so:'Angaben: mAh (Milliamperestunden) oder Wh (Wattstunden). Handys haben etwa 4.000 bis 5.000 mAh, Laptops etwa 40 bis 100 Wh.',bed:'Mit jedem Ladezyklus altert der Akku ein wenig. Nach vielen Hundert Zyklen hat er spürbar weniger Kapazität.',tipp:'Ein aufgeblähter Akku (Gehäuse wölbt sich, Display hebt sich) ist gefährlich: Gerät nicht mehr laden und zur Reparatur bringen.'}},
+
+{id:'laden',a:'innen',t:'Laden: USB-C & Schnellladen',steps:[
+ S('USB-C ist der einheitliche Ladeanschluss in der EU: seit Ende 2024 für neue Handys, Tablets und Kopfhörer, seit April 2026 auch für neue Laptops.',[PH(70,110,1.3),B(150,92,100,36,'a','USB-C',{fa:.2}),TB(330,110,1),P('EIN STECKER FÜR ALLES',200,185,'a')]),
+ S('Die Ladeleistung in Watt entscheidet über das Tempo: Watt = Volt × Ampere. Mit USB Power Delivery sind bis zu 240 Watt möglich.',[T('Watt = Volt × Ampere',200,70,20,'gold',1),P('9 V × 3 A = 27 W',200,120,'a'),T('USB Power Delivery: bis 240 W',200,170,12,'mut',1)],1),
+ S('Schnellladen ist am Anfang am schnellsten. Ab etwa 80 % wird der Strom gedrosselt, um den Akku zu schonen – die letzten Prozent dauern am längsten.',[LN([[50,200],[360,200]],'mut',{w:1.5}),LN([[50,200],[50,40]],'mut',{w:1.5}),LN([[50,72],[360,72]],'mut',{w:1,dash:1}),T('80 %',46,72,10,'mut',1,{al:'right'}),T('Zeit →',360,222,10,'mut',1,{al:'right'}),LN([[50,200],[110,125],[160,86],[200,72],[280,58],[360,52]],'green',{w:2.5}),P('SCHNELL',125,170,'green'),P('LANGSAM',290,100,'gold')],1),
+ S('Kabellos laden (Qi oder Qi2) funktioniert über Spulen: Ein Magnetfeld überträgt die Energie. Bequem, aber meist langsamer und mit mehr Wärme.',[B(110,150,180,24,'mut','LADEPAD',{fa:.2}),RAD(200,150,3,12,-180,0,'a'),PH(200,110,1.6),P('MAGNETFELD',325,95,'a'),T('langsamer · wärmer',200,205,11,'mut',1)],1)
+],info:{was:'Beim Laden fließt Strom vom Netzteil über das Kabel in den Akku. Ein Ladechip im Gerät steuert, wie viel Strom fließen darf.',so:'Auf dem Netzteil steht die Leistung in Watt (W). Handys laden meist mit 20 bis 45 W, Laptops brauchen meist 45 bis 100 W.',bed:'Das Gerät nimmt sich nur so viel Leistung, wie es verträgt. Ein stärkeres USB-C-Netzteil ist also nicht gefährlich – es lädt höchstens schneller.',tipp:'Nicht jedes USB-C-Kabel schafft hohe Leistung: Für Laptops ein Kabel mit 100-W- oder 240-W-Angabe nutzen.'}},
+
+/* ---------- WEARABLES & SMART-GERÄTE ---------- */
+{id:'watch',a:'smart',t:'Die Smartwatch',steps:[
+ S('Eine Smartwatch ist ein kleiner Computer am Handgelenk. Sie zeigt Uhrzeit, Nachrichten, Anrufe und Termine vom Handy an.',[WT(120,120,2.1),LN([[170,120],[270,120]],'a',{dash:1,w:1.5}),PH(305,120,1.6),P('BLUETOOTH',220,95,'a')]),
+ S('Auf der Rückseite leuchten grüne LEDs in die Haut. Ein Sensor misst, wie viel Licht zurückkommt – daraus berechnet die Uhr den Puls.',[B(100,152,200,40,'#fca5a5','HAUT',{fa:.22}),WT(200,88,1.4),D(186,146,4,'green'),D(200,146,4,'green'),D(214,146,4,'green'),P('GRÜNES LICHT → PULS',318,60,'green')],1),
+ S('Mit GPS zeichnet die Uhr Läufe und Radtouren auf. Über NFC kannst du an der Kasse mit der Uhr bezahlen.',[E('🏃',85,100,44),T('GPS-Strecke',85,155,12,'txt',1),WT(200,110,1.2),E('💳',315,100,44),T('Bezahlen per NFC',315,155,12,'txt',1)],1),
+ S('Der kleine Akku ist die Schwachstelle: Viele Smartwatches halten 1 bis 3 Tage, einfache Fitness-Uhren eine Woche oder länger.',[BT(200,85,130,54,.35),T('1–3 Tage (Smartwatch)',200,155,13,'txt',1),T('1 Woche+ (Fitness-Uhr)',200,188,13,'green',1)],1)
+],info:{was:'Eine Smartwatch ist eine computergestützte Uhr, die mit dem Smartphone gekoppelt ist und eigene Apps ausführen kann.',so:'Systeme: watchOS (Apple Watch, nur mit iPhone), Wear OS (z. B. Samsung Galaxy Watch, Google Pixel Watch) und eigene Systeme von Garmin, Huawei und anderen.',bed:'Viele Uhren erkennen Stürze und können automatisch einen Notruf absetzen – das kann besonders für ältere Menschen wichtig sein.',tipp:'Eine Apple Watch funktioniert nur mit dem iPhone. Galaxy Watches spielen ihre vollen Funktionen am besten mit einem Samsung-Handy aus.'}},
+
+{id:'tracker',a:'smart',t:'Fitness-Tracker & Smart Ring',steps:[
+ S('Fitness-Tracker sind schmale Armbänder. Sie zählen Schritte, messen den Puls und zeigen, wie aktiv du am Tag warst.',[B(110,95,180,40,'mut','',{fa:.2}),B(165,100,70,30,'a','',{fa:.35}),T('8.432',200,116,13,'txt',1),P('SCHRITTE · PULS · AKTIVITÄT',200,180,'a')]),
+ S('Ein Smart Ring steckt die Sensoren in einen Fingerring. Er ist kaum zu spüren – darum tragen ihn viele auch nachts.',[D(200,105,44,'gold'),D(200,105,32,'cv'),P('SMART RING',200,190,'gold')],1),
+ S('Nachts werten Tracker Bewegung und Puls aus und schätzen daraus, wie lange und wie ruhig du geschlafen hast.',[E('😴',85,110,50),B(165,120,26,60,'blue','',{fa:.5}),B(195,90,26,90,'blue','',{fa:.5}),B(225,140,26,40,'blue','',{fa:.5}),B(255,100,26,80,'blue','',{fa:.5}),B(285,130,26,50,'blue','',{fa:.5}),B(315,95,26,85,'blue','',{fa:.5}),P('SCHLAF-AUSWERTUNG',253,50,'blue')],1),
+ S('Wichtig: Fitness-Geräte schätzen nur. Sie sind keine Medizingeräte – bei Beschwerden zählt immer der Arzt.',[T('≈ SCHÄTZUNG',200,85,26,'gold',1),P('KEIN MEDIZINGERÄT',200,145,'red')],1)
+],info:{was:'Fitness-Tracker und Smart Rings sind schlanke Wearables, die Bewegung, Puls und Schlaf aufzeichnen.',so:'Die Daten landen in einer App auf dem Handy (z. B. Samsung Health, Google Fit oder Apple Health) und werden dort als Verlauf angezeigt.',bed:'Die Werte motivieren zu mehr Bewegung. Gesundheitsdaten sind aber sehr persönlich – prüfe, welche App welche Daten wohin überträgt.',tipp:'Für genauere Pulswerte das Armband etwa einen Fingerbreit oberhalb des Handgelenkknochens und eher eng tragen.'}},
+
+{id:'kopfhoerer',a:'smart',t:'Kopfhörer & Noise Cancelling',steps:[
+ S('Kabellose Kopfhörer bekommen die Musik per Bluetooth vom Handy. In jedem Ohrstöpsel stecken Akku, Funkchip, Lautsprecher und Mikrofone.',[E('🎧',115,110,60),LN([[160,110],[265,110]],'a',{dash:1,w:1.5}),PH(300,110,1.4),P('BLUETOOTH',212,82,'a')]),
+ S('Aktive Geräuschunterdrückung (ANC): Mikrofone hören den Lärm von außen, zum Beispiel das Brummen im Zug oder im Flugzeug.',[WV(20,280,70,20,52,'red'),P('LÄRM',335,70,'red')],1),
+ S('Der Chip erzeugt blitzschnell eine Gegenwelle – genau spiegelverkehrt. Lärm und Gegenwelle löschen sich gegenseitig fast aus.',[WV(20,280,135,-20,52,'a'),P('GEGENWELLE',335,135,'a'),LN([[20,195],[280,195]],'green',{w:2.5}),P('= STILLE',335,195,'green')]),
+ S('ANC wirkt am besten bei gleichmäßigem, tiefem Lärm wie Motoren. Der Transparenzmodus macht das Gegenteil: Er holt die Umgebung gezielt ins Ohr.',[E('✈️',95,90,44),T('Motorbrummen: sehr gut',95,145,11,'green',1),E('🗣️',305,90,44),T('Stimmen: weniger',305,145,11,'gold',1),P('TRANSPARENZMODUS: UMGEBUNG HÖREN',200,200,'a')],1)
+],info:{was:'Noise Cancelling (ANC) unterdrückt Umgebungslärm aktiv mit Gegenschall – zusätzlich zur Dämpfung durch Ohrpolster oder Silikonaufsätze.',so:'Erkennbar am Kürzel ANC. Ein Transparenz- oder Umgebungsmodus lässt Geräusche durch, z. B. für Durchsagen oder im Straßenverkehr.',bed:'Mit ANC kannst du Musik leiser hören und schonst dein Gehör – weil du den Lärm nicht übertönen musst.',tipp:'Im Straßenverkehr, beim Radfahren und Joggen den Transparenzmodus nutzen – damit du Autos und Klingeln hörst.'}},
+
+{id:'tv',a:'smart',t:'Smart-TV & Streaming-Stick',steps:[
+ S('Ein Smart-TV ist ein Fernseher mit eingebautem Computer: Er geht per WLAN oder Kabel ins Internet und hat Apps für Mediatheken und Streaming.',[E('📺',200,100,80),P('APPS · MEDIATHEK · STREAMING',200,185,'a')]),
+ S('Ein Streaming-Stick macht auch ältere Fernseher smart: einfach in den HDMI-Anschluss stecken und mit dem WLAN verbinden.',[E('📺',115,105,72),A(228,108,170,108,'a'),B(232,96,80,24,'a','STICK',{fa:.25}),P('HDMI + WLAN',272,165,'gold')],1),
+ S('4K bedeutet 3.840 × 2.160 Pixel – rund 8,3 Millionen Bildpunkte und damit viermal so viele wie Full HD mit 1.920 × 1.080.',[B(50,35,300,170,'a','',{fa:.07}),B(50,35,150,85,'gold','FULL HD',{fa:.25}),LN([[200,35],[200,205]],'a',{w:1,dash:1}),LN([[50,120],[350,120]],'a',{w:1,dash:1}),T('4K = 4 × Full HD',275,150,13,'a',1),T('≈ 8,3 Mio. Pixel',275,178,12,'txt',1)],1),
+ S('HDR zeigt hellere Lichter und tiefere Schatten. Für ruckelfreies 4K-Streaming brauchst du etwa 15 bis 25 Mbit/s Internet.',[T('HDR',200,70,30,'gold',1),T('hellere Lichter · tiefere Schatten',200,110,12,'mut',1),P('4K-STREAM: CA. 15–25 Mbit/s',200,165,'a')],1)
+],info:{was:'Smart-TVs und Streaming-Sticks bringen Internetdienste auf den großen Bildschirm.',so:'Systeme: Google TV/Android TV, Tizen (Samsung), webOS (LG), Fire TV (Amazon) und Apple TV. Bedienung per Fernbedienung, Sprache oder Handy-App.',bed:'Fernseher bekommen oft nur einige Jahre Updates – ein günstiger Stick hält ein älteres Gerät danach weiter aktuell.',tipp:'Viele Fernseher werten aus, was du schaust. In den Datenschutz-Einstellungen kannst du die Inhaltserkennung (oft „ACR“ oder „Viewing Information“) abschalten.'}},
+
+{id:'konsole',a:'smart',t:'Spielkonsole & Handheld',steps:[
+ S('Eine Spielkonsole ist ein Computer, der ganz für Spiele gebaut ist. Chip und Software sind genau aufeinander abgestimmt.',[E('🎮',200,100,72),P('FÜR SPIELE OPTIMIERT',200,180,'a')]),
+ S('Das Wichtigste ist der Grafikchip (GPU). Er berechnet jede Sekunde 30, 60 oder sogar 120 Einzelbilder – je mehr, desto flüssiger.',[B(50,70,64,46,'mut','',{fa:.12}),B(70,85,64,46,'mut','',{fa:.18}),B(90,100,64,46,'a','',{fa:.25}),T('60 Bilder pro Sekunde',265,95,14,'gold',1),P('FPS = BILDER PRO SEKUNDE',265,140,'a')],1),
+ S('Handhelds sind Konsolen zum Mitnehmen – mit eingebautem Bildschirm und Akku. Manche lassen sich auch an den Fernseher anschließen.',[B(105,82,190,76,'mut','',{fa:.15}),B(152,90,96,60,'a','',{fa:.25}),D(128,120,10,'mut'),D(272,120,10,'mut'),P('HANDHELD',200,192,'a')],1),
+ S('Cloud-Gaming: Das Spiel läuft in einem Rechenzentrum, du bekommst nur das Video. Dafür brauchst du schnelles, stabiles Internet.',[E('☁️',95,90,50),T('Rechenzentrum',95,140,11,'txt',1),A(145,95,250,95,'a'),E('📺',300,92,46),T('nur das Video',300,140,11,'txt',1),P('STABILES INTERNET NÖTIG',200,195,'gold')],1)
+],info:{was:'Spielkonsolen und Handhelds sind auf Spiele spezialisierte Computer – vom Wohnzimmergerät bis zur tragbaren Konsole.',so:'Wichtige Werte: Auflösung (Full HD, 4K), Bildrate (FPS), Speicher für Spiele und ob Online-Spielen ein Abo braucht.',bed:'Konsolen sind einfacher zu bedienen als ein Gaming-PC, lassen sich aber kaum aufrüsten.',tipp:'Für Kinder: In den Jugendschutz-Einstellungen lassen sich Spielzeit, Käufe und Altersfreigaben (USK) festlegen.'}},
+
+/* ---------- SOFTWARE & BETRIEBSSYSTEME ---------- */
+{id:'os',a:'software',t:'Android, iOS, Windows & Co.',steps:[
+ S('Das Betriebssystem ist die Grundsoftware. Es verwaltet Speicher, Akku, Bildschirm und Funk – und lässt die Apps darauf laufen.',[B(80,40,240,40,'a','APPS',{fa:.25}),B(80,90,240,40,'gold','BETRIEBSSYSTEM',{fa:.25}),B(80,140,240,40,'mut','HARDWARE',{fa:.25}),T('Chip · Speicher · Akku · Display',200,202,11,'mut',1)]),
+ S('Auf Smartphones gibt es vor allem zwei: Android von Google (viele Hersteller wie Samsung) und iOS (nur auf dem iPhone).',[P('ANDROID',110,75,'green'),T('Samsung, Google, Xiaomi …',110,110,11,'txt',1),P('iOS',290,75,'a'),T('nur Apple iPhone',290,110,11,'txt',1),T('weltweit: ca. 70 % Android · 30 % iOS',200,175,12,'gold',1)],1),
+ S('Auf Computern: Windows (am weitesten verbreitet), macOS (Apple), ChromeOS (Chromebooks) und Linux (frei und kostenlos).',[P('WINDOWS',110,70,'blue'),P('macOS',290,70,'a'),P('ChromeOS',110,125,'gold'),P('LINUX',290,125,'green'),T('Betriebssysteme für Computer',200,185,11,'mut',1)],1),
+ S('Jedes Betriebssystem bekommt nur eine bestimmte Zeit Updates. Windows 10 zum Beispiel wird seit Oktober 2025 nicht mehr regulär versorgt.',[T('Windows 10',200,70,22,'txt',1),P('SUPPORT-ENDE: 14.10.2025',200,118,'red'),T('→ Windows 11 oder neues Gerät',200,168,12,'mut',1)],1)
+],info:{was:'Das Betriebssystem (englisch Operating System, kurz OS) ist die Software, die ein Gerät überhaupt erst benutzbar macht.',so:'Handy: Android, iOS. Tablet: Android, iPadOS. Computer: Windows, macOS, ChromeOS, Linux. Uhr: Wear OS, watchOS.',bed:'Das Betriebssystem entscheidet, welche Apps es gibt und wie gut Geräte zusammenarbeiten – das nennt man Ökosystem.',tipp:'Bei Samsung findest du die Version unter Einstellungen → Telefoninfo → Softwareinformationen.'}},
+
+{id:'apps',a:'software',t:'Apps & App-Stores',steps:[
+ S('Apps sind Programme für bestimmte Aufgaben – vom Messenger über Banking bis zum Wetterbericht.',[E('💬',100,75,42),E('🏦',200,75,42),E('🌦️',300,75,42),E('🗺️',100,160,42),E('📷',200,160,42),E('🎵',300,160,42)]),
+ S('Apps lädt man aus einem App-Store: dem Google Play Store bei Android oder dem App Store bei Apple. Dort werden sie auf Schadsoftware geprüft.',[P('GOOGLE PLAY STORE',200,70,'green'),P('APPLE APP STORE',200,115,'a'),K(120,170,11),T('Apps werden geprüft',215,170,13,'txt',1)],1),
+ S('Berechtigungen: Eine App muss fragen, bevor sie Kamera, Mikrofon, Standort oder Kontakte nutzen darf. Erlaube nur, was wirklich nötig ist.',[B(85,45,230,135,'mut','',{fa:.08}),T('„Taschenlampe“ möchte',200,75,12,'txt',1),T('auf deine Kontakte zugreifen',200,98,12,'txt',1),P('ERLAUBEN',145,145,'green'),P('ABLEHNEN',255,145,'red'),T('Wozu braucht sie das?',200,210,12,'gold',1)],1),
+ S('Viele kostenlose Apps verdienen ihr Geld mit Werbung, Abos oder In-App-Käufen. Prüfe vor dem Installieren Bewertungen, Anbieter und Downloadzahl.',[P('WERBUNG',100,75,'gold'),P('ABO',200,75,'gold'),P('IN-APP-KÄUFE',300,75,'gold'),T('Vorher prüfen:',200,135,12,'txt',1),T('Bewertungen · Anbieter · Downloads',200,165,12,'mut',1)],1)
+],info:{was:'Eine App (kurz für Applikation) ist ein Programm, das zusätzliche Funktionen auf das Gerät bringt.',so:'Installieren über den App-Store. Berechtigungen beim ersten Start erlauben oder ablehnen – oder später in den Einstellungen unter „Apps“ ändern.',bed:'Apps aus unbekannten Quellen (APK-Dateien aus dem Internet) können Schadsoftware enthalten – darum sind sie bei Android standardmäßig blockiert.',tipp:'Räum regelmäßig auf: Apps, die du seit Monaten nicht genutzt hast, belegen Speicher und sammeln womöglich trotzdem Daten.'}},
+
+{id:'updates',a:'software',t:'Updates',steps:[
+ S('Updates sind Verbesserungen vom Hersteller: Sie schließen Sicherheitslücken, beheben Fehler und bringen manchmal neue Funktionen.',[E('🔄',200,85,56),P('SICHERHEIT',85,165,'red'),P('FEHLER',200,165,'gold'),P('FUNKTIONEN',315,165,'green')]),
+ S('Sicherheitsupdates kommen oft monatlich. Sie sind die wichtigsten, weil Angreifer bekannte Lücken gezielt ausnutzen.',[T('monatlich',200,80,26,'a',1),P('SICHERHEITSPATCH',200,130,'red'),T('bekannte Lücken werden geschlossen',200,175,12,'mut',1)],1),
+ S('Seit dem 20. Juni 2025 müssen neue Handys und Tablets in der EU noch mindestens 5 Jahre nach dem Verkaufsende Updates bekommen.',[T('EU-REGEL',200,58,15,'txt',1),T('≥ 5 Jahre Updates',200,102,24,'gold',1),P('NACH VERKAUFSENDE · SEIT 20.06.2025',200,152,'a')],1),
+ S('Ohne Updates wird ein Gerät mit der Zeit unsicher. Für Online-Banking und Einkäufe sollte es immer aktuelle Sicherheitsupdates haben.',[PH(120,115,2),X(120,115,22),T('veraltet = unsicher',120,200,12,'red',1),PH(280,115,2),K(302,82,13),T('aktuell',280,200,12,'green',1)],1)
+],info:{was:'Ein Update ist eine neue Version der Software – fürs Betriebssystem oder für einzelne Apps.',so:'Bei Samsung: Einstellungen → Software-Update → Herunterladen und installieren. Apps aktualisieren sich meist automatisch über den Play Store.',bed:'Wie lange ein Gerät Updates bekommt, ist beim Kauf genauso wichtig wie der Preis – ein Handy ohne Updates wird schnell zum Sicherheitsrisiko.',tipp:'Updates am besten nachts im WLAN und am Ladegerät installieren lassen – dann stören sie nicht und kosten kein Datenvolumen.'}},
+
+{id:'cloud',a:'software',t:'Cloud & Synchronisation',steps:[
+ S('Die Cloud ist Speicherplatz in großen Rechenzentren im Internet. Deine Daten liegen dort zusätzlich zum Gerät.',[E('☁️',200,90,76),P('SPEICHER IM INTERNET',200,182,'a')]),
+ S('Synchronisation: Machst du ein Foto mit dem Handy, erscheint es kurz danach auch auf Tablet und Laptop – weil alle Geräte mit der Cloud abgeglichen werden.',[E('☁️',200,52,50),PH(80,170,1.2),TB(200,172,1),LP(320,190,.75),A(98,135,172,72,'a',{bi:1}),A(200,128,200,84,'a',{bi:1}),A(305,140,228,72,'a',{bi:1})],1),
+ S('Etwas Speicher gibt es meist kostenlos: zum Beispiel 15 GB bei Google und 5 GB bei Apple iCloud. Mehr Speicher kostet eine monatliche Gebühr.',[P('GOOGLE: 15 GB GRATIS',200,75,'green'),P('iCLOUD: 5 GB GRATIS',200,120,'a'),T('mehr Platz = Abo',200,170,13,'gold',1)],1),
+ S('Die Cloud ist ein gutes Backup: Geht das Handy kaputt oder verloren, sind Fotos und Kontakte nicht weg – sie kommen aufs neue Gerät zurück.',[PH(85,115,1.6),X(85,115,20),E('☁️',200,90,44),A(232,115,285,115,'green'),PH(320,115,1.6),K(340,85,12),P('ALLES WIEDER DA',200,200,'green')],1)
+],info:{was:'Cloud bedeutet: Daten und Programme liegen auf Servern im Internet statt nur auf deinem Gerät.',so:'Bekannte Dienste: Google Drive und Google Fotos, Apple iCloud, Microsoft OneDrive, Dropbox. Bei Samsung die Sicherung unter Einstellungen → Konten und Sicherung einschalten.',bed:'Wer die Cloud nutzt, vertraut seine Daten einem Anbieter an. Ein starkes Passwort und die Zwei-Faktor-Anmeldung sind deshalb Pflicht.',tipp:'Für besonders wichtige Daten zusätzlich eine eigene Sicherung auf einer externen SSD machen – dann hast du alles doppelt.'}},
+
+{id:'verbinden',a:'software',t:'Geräte miteinander verbinden',steps:[
+ S('Bluetooth koppelt Geräte in der Nähe – zum Beispiel Kopfhörer, Uhr, Lautsprecher oder das Auto.',[PH(200,120,1.6),LN([[180,100],[100,72]],'a',{dash:1,w:1.5}),LN([[220,100],[300,72]],'a',{dash:1,w:1.5}),LN([[180,140],[100,172]],'a',{dash:1,w:1.5}),LN([[220,140],[300,172]],'a',{dash:1,w:1.5}),E('🎧',80,68,34),E('⌚',320,68,34),E('🔊',80,178,34),E('🚗',320,178,34)]),
+ S('Hotspot: Dein Handy teilt sein mobiles Internet per WLAN. So kommen Laptop oder Tablet auch unterwegs ins Netz.',[PH(105,120,1.6),RAD(130,120,3,16,-50,50,'a'),LP(295,150,1.1),P('HOTSPOT',200,36,'a'),T('kostet Datenvolumen',200,210,11,'gold',1)],1),
+ S('Bildschirm übertragen: Mit Smart View (Samsung), Chromecast oder AirPlay zeigst du Fotos und Videos vom Handy auf dem Fernseher.',[PH(85,125,1.4),A(115,115,215,105,'a',{dash:1}),E('📺',290,105,72),P('AUF DEN FERNSEHER',200,200,'a')],1),
+ S('Dateien senden: Quick Share (Android und Samsung) und AirDrop (Apple) schicken Fotos direkt von Gerät zu Gerät – ganz ohne Kabel.',[PH(95,115,1.6),PH(305,115,1.6),A(128,130,272,130,'gold'),E('🖼️',200,100,30),P('QUICK SHARE · AIRDROP',200,200,'gold')],1)
+],info:{was:'Moderne Geräte arbeiten zusammen: Sie teilen Internet, Bildschirm, Dateien und sogar die Zwischenablage.',so:'Bluetooth für Zubehör, Hotspot fürs Internet, Quick Share oder AirDrop für Dateien, Smart View, Chromecast oder AirPlay für den Fernseher.',bed:'Geräte vom gleichen Hersteller arbeiten oft besonders gut zusammen – zum Beispiel Samsung-Handy, Galaxy Tab, Galaxy Watch und Galaxy Buds.',tipp:'Stell bei Quick Share bzw. AirDrop ein, dass nur deine Kontakte dir etwas schicken dürfen – so bekommst du keine Bilder von Fremden.'}},
+
+/* ---------- KAUFEN, PFLEGEN & SCHÜTZEN ---------- */
+{id:'kaufen',a:'praxis',t:'Welches Gerät für wen?',steps:[
+ S('Überleg zuerst, wofür du das Gerät brauchst. Davon hängt ab, welche Art von Gerät am besten passt.',[E('🤔',200,95,64),P('WOFÜR BRAUCHE ICH ES?',200,180,'a')]),
+ S('Telefonieren, Messenger, Fotos und unterwegs alles erledigen: Smartphone. Lesen, Videos und Surfen auf dem Sofa: Tablet.',[PH(100,105,1.6),T('immer dabei',100,170,12,'txt',1),TB(300,105,1.2),T('Sofa · Lesen · Video',300,170,12,'txt',1)],1),
+ S('Schreiben, Tabellen, Steuer, Schule und Homeoffice: Laptop. Viel Leistung für Spiele und Videoschnitt: Desktop-PC.',[LP(105,125,1.2),T('Arbeiten · Schreiben',105,175,12,'txt',1),E('🖥️',300,100,62),T('Spiele · Videoschnitt',300,175,12,'txt',1)],1),
+ S('Faustregel: Ein gutes Mittelklasse-Gerät mit langen Updates ist oft klüger als ein Billiggerät oder das teuerste Spitzenmodell.',[BAR(80,190,60,45,'red','billig','kurze Updates'),BAR(170,190,60,105,'green','Mitte','beste Wahl'),BAR(260,190,60,140,'gold','Spitze','sehr teuer')],1)
+],info:{was:'Das richtige Gerät hängt von deinen Aufgaben ab – nicht vom höchsten Preis.',so:'Frag dich: Wofür nutze ich es? Wie lange soll es halten? Welche Geräte habe ich schon (Ökosystem)? Wie viel Speicher brauche ich?',bed:'Wer schon Samsung-Geräte hat, profitiert vom Zusammenspiel im Galaxy-Ökosystem – das gilt genauso für Apple-Geräte untereinander.',tipp:'Generalüberholte Geräte („refurbished“) vom Fachhändler sind oft deutlich günstiger, geprüft und trotzdem mit Gewährleistung.'}},
+
+{id:'label',a:'praxis',t:'Datenblatt & EU-Label lesen',steps:[
+ S('Seit Juni 2025 haben neue Handys und Tablets in der EU ein Energielabel – mit einer Effizienzklasse von A bis G.',[B(130,35,140,175,'mut','',{fa:.06}),...LABEL.map((c,i)=>B(142,46+i*22,42+i*12,17,c,'',{fa:.75})),...'ABCDEFG'.split('').map((ch,i)=>T(ch,152,55+i*22,11,'#0b0f14',1)),P('EU-ENERGIELABEL',200,226,'a')]),
+ S('Außerdem stehen dort: Akkulaufzeit pro Ladung, Ladezyklen, Sturzfestigkeit (A–E), Reparierbarkeit (A–E) und der Schutz gegen Staub und Wasser.',[T('Akkulaufzeit pro Ladung',50,45,13,'txt',1,{al:'left'}),T('Stunden',350,45,13,'gold',1,{al:'right'}),T('Ladezyklen',50,80,13,'txt',1,{al:'left'}),T('Anzahl',350,80,13,'gold',1,{al:'right'}),T('Sturzfestigkeit',50,115,13,'txt',1,{al:'left'}),T('A–E',350,115,13,'gold',1,{al:'right'}),T('Reparierbarkeit',50,150,13,'txt',1,{al:'left'}),T('A–E',350,150,13,'gold',1,{al:'right'}),T('Staub & Wasser',50,185,13,'txt',1,{al:'left'}),T('IP-Klasse',350,185,13,'gold',1,{al:'right'})],1),
+ S('IP-Schutz: Die erste Ziffer steht für Staub (bis 6), die zweite für Wasser (bis 9). IP68 heißt: staubdicht und geschützt beim Untertauchen.',[T('IP 6 8',200,80,40,'a',1),P('STAUB: 6 = DICHT',110,150,'gold'),P('WASSER: 8 = UNTERTAUCHEN',290,150,'blue')],1),
+ S('Die wichtigsten Werte im Datenblatt: Chip, RAM, Speicher, Display, Akku, Kamera – und wie lange es Updates gibt.',[K(70,45,11),T('Chip & RAM',95,45,13,'txt',1,{al:'left'}),K(70,80,11),T('Speicher (GB)',95,80,13,'txt',1,{al:'left'}),K(70,115,11),T('Display (Zoll, Hz)',95,115,13,'txt',1,{al:'left'}),K(70,150,11),T('Akku (mAh / Wh)',95,150,13,'txt',1,{al:'left'}),K(70,185,11),T('Updates (wie viele Jahre?)',95,185,13,'gold',1,{al:'left'})],1)
+],info:{was:'Datenblatt und EU-Label fassen die wichtigsten Eigenschaften eines Geräts auf einen Blick zusammen.',so:'Auf dem EU-Label: Energieklasse A–G, Akkulaufzeit pro Ladung, Ladezyklen, Sturzfestigkeit A–E, Reparierbarkeit A–E und IP-Schutzklasse. Über den QR-Code gibt es mehr Infos in der EU-Datenbank EPREL.',bed:'So kannst du Geräte verschiedener Marken ehrlich vergleichen – nicht nur nach Werbeversprechen.',tipp:'IP68 heißt nicht „unzerstörbar“: Salzwasser, Chlorwasser und heißer Dampf können trotzdem schaden – und Wasserschäden sind oft nicht von der Garantie gedeckt.'}},
+
+{id:'akkupflege',a:'praxis',t:'Akku schonen',steps:[
+ S('Akkus mögen es weder ganz voll noch ganz leer. Am wohlsten fühlen sie sich zwischen etwa 20 und 80 Prozent.',[P('WOHLFÜHLBEREICH',200,60,'green'),B(50,90,300,40,'mut','',{fa:.08}),B(110,90,180,40,'green','',{fa:.35}),T('0 %',50,150,11,'red',1),T('20 %',110,150,11,'txt',1),T('80 %',290,150,11,'txt',1),T('100 %',350,150,11,'red',1)]),
+ S('Viele Handys können das Laden bei 80 % stoppen. Bei Samsung heißt das „Akkuschutz“: Einstellungen → Akku → Akkuschutz.',[PH(75,120,1.8),T('Einstellungen',140,72,13,'txt',1,{al:'left'}),T('→ Akku',140,102,13,'txt',1,{al:'left'}),T('→ Akkuschutz',140,132,13,'txt',1,{al:'left'}),P('LADESTOPP BEI 80 %',255,182,'green')],1),
+ S('Hitze ist der größte Feind: Lass das Gerät nicht in der Sonne oder im heißen Auto liegen und spiel beim Laden keine aufwendigen Spiele.',[E('🌡️',85,95,50),E('🚗',200,95,46),E('☀️',315,95,46),P('HITZE VERMEIDEN',200,168,'red')],1),
+ S('Über Nacht laden ist in Ordnung, wenn der Akkuschutz an ist. Ein Original- oder geprüftes Ladegerät ist sicherer als billige No-Name-Ware.',[E('🌙',100,95,46),K(130,70,11),T('mit Akkuschutz ok',100,150,12,'txt',1),E('🔌',300,95,46),T('geprüftes Ladegerät',300,150,12,'txt',1),P('KEINE BILLIG-NETZTEILE',200,200,'gold')],1)
+],info:{was:'Akku schonen heißt: den Akku so behandeln, dass er möglichst lange viel Kapazität behält.',so:'Zwischen 20 und 80 % halten, Hitze vermeiden, Ladebegrenzung nutzen. Den Akkuzustand zeigt bei Samsung die App Samsung Members unter Diagnose → Akkustatus.',bed:'Neue Handys und Tablets müssen laut EU-Regel nach 800 Ladezyklen noch mindestens 80 % Kapazität haben – mit Schonung schaffen sie oft deutlich mehr.',tipp:'Zum Einlagern (z. B. ein altes Handy in der Schublade) den Akku auf etwa 50 % laden und das Gerät ausschalten.'}},
+
+{id:'schutz',a:'praxis',t:'Sperre, Backup & Diebstahl',steps:[
+ S('Schütze jedes Gerät mit einer Sperre: PIN (am besten 6-stellig), Passwort, Fingerabdruck oder Gesichtserkennung.',[E('🔒',200,85,56),P('PIN',90,160,'a'),P('FINGERABDRUCK',200,160,'a'),P('GESICHT',310,160,'a')]),
+ S('Zwei-Faktor-Anmeldung: Zum Passwort kommt ein zweiter Nachweis, zum Beispiel ein Code aufs Handy. Ein gestohlenes Passwort allein reicht dann nicht.',[E('🔑',100,95,44),T('Passwort',100,145,12,'txt',1),T('+',200,95,30,'mut',1),PH(300,95,1.2),T('Code',300,145,12,'txt',1),P('ZWEI-FAKTOR = DOPPELT SICHER',200,195,'green')],1),
+ S('3-2-1-Regel für Backups: 3 Kopien deiner Daten, auf 2 verschiedenen Speichern, davon 1 an einem anderen Ort – zum Beispiel in der Cloud.',[T('3',90,80,42,'a',1),T('Kopien',90,125,12,'txt',1),T('2',200,80,42,'gold',1),T('Speicherarten',200,125,12,'txt',1),T('1',310,80,42,'green',1),T('außer Haus',310,125,12,'txt',1),P('3-2-1-REGEL',200,185,'a')],1),
+ S('Handy weg? Mit „Mein Gerät finden“ (Google) oder SmartThings Find (Samsung) kannst du es orten, klingeln lassen, sperren oder löschen.',[E('🗺️',110,105,64),D(122,95,6,'red'),PH(290,105,1.5),P('ORTEN · SPERREN · LÖSCHEN',200,198,'red')],1)
+],info:{was:'Gerätesicherheit schützt deine Daten, Konten und dein Geld, falls das Gerät verloren geht oder gestohlen wird.',so:'Bildschirmsperre einrichten, Zwei-Faktor-Anmeldung für wichtige Konten, regelmäßige Backups und die Ortungsfunktion einschalten.',bed:'Auf dem Handy steckt heute oft das halbe Leben: Fotos, Banking, Mails, Ausweis-Apps. Ein Verlust ohne Sperre und Backup kann teuer werden.',tipp:'Bei Diebstahl: SIM-Karte sofort beim Mobilfunkanbieter sperren lassen und bei der Polizei Anzeige mit der IMEI-Nummer erstatten.'}},
+
+{id:'reparatur',a:'praxis',t:'Reparieren & Recyceln',steps:[
+ S('Kaputt heißt nicht wertlos: Display, Akku und Ladebuchse lassen sich oft tauschen – das ist meist viel günstiger als ein neues Gerät.',[E('🔧',200,88,56),P('DISPLAY',90,165,'a'),P('AKKU',200,165,'a'),P('LADEBUCHSE',310,165,'a')]),
+ S('Die EU macht Reparieren leichter: Hersteller müssen für Handys und Tablets 7 Jahre lang Ersatzteile anbieten – geliefert in 5 bis 10 Arbeitstagen.',[T('7 Jahre',200,80,30,'gold',1),P('ERSATZTEILE SIND PFLICHT',200,130,'a'),T('Lieferung in 5–10 Arbeitstagen',200,175,12,'mut',1)],1),
+ S('Vor dem Verkauf oder Entsorgen: Daten sichern, aus allen Konten abmelden und auf Werkseinstellungen zurücksetzen. SIM- und Speicherkarte rausnehmen!',[K(80,55,11),T('Backup machen',105,55,13,'txt',1,{al:'left'}),K(80,95,11),T('Aus Konten abmelden',105,95,13,'txt',1,{al:'left'}),K(80,135,11),T('Werkseinstellungen',105,135,13,'txt',1,{al:'left'}),K(80,175,11),T('SIM & microSD raus',105,175,13,'txt',1,{al:'left'})],1),
+ S('Alte Geräte gehören nie in den Hausmüll: Sie enthalten wertvolle Rohstoffe wie Gold, Kupfer und Kobalt. Abgeben kannst du sie am Wertstoffhof oder im Handel.',[E('♻️',200,80,56),P('GOLD · KUPFER · KOBALT',200,140,'gold'),T('Wertstoffhof · Elektrohandel · Supermarkt',200,185,11,'mut',1)],1)
+],info:{was:'Reparieren und Recyceln verlängert die Lebensdauer von Geräten und spart Geld und Rohstoffe.',so:'Reparatur beim Hersteller, im Fachbetrieb oder im Repair-Café. Altgeräte kostenlos zurückgeben: am Wertstoffhof, bei größeren Elektrohändlern und in Supermärkten, die Elektrogeräte verkaufen.',bed:'Laut EU-Batterieverordnung sollen sich Akkus in vielen neuen Geräten ab 2027 wieder leichter austauschen lassen.',tipp:'Akkus und Geräte mit Akku nie in die Restmülltonne: Beschädigte Lithium-Akkus können im Müllauto oder auf dem Recyclinghof Brände auslösen.'}}
+];
+
+L.forEach((l,i)=>{l.i=i;});
+const byId=Object.fromEntries(L.map(l=>[l.id,l]));
+const areaOf=id=>AREAS.find(a=>a.id===id);
+const lessonsOf=aid=>L.filter(l=>l.a===aid);
+
+/* ============ Farben ============ */
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+let PAL={};
+function readPal(){PAL={txt:cssv('--tx'),mut:cssv('--mut'),gold:cssv('--gold'),green:cssv('--green'),red:cssv('--red'),blue:cssv('--blue'),cv:cssv('--cv'),grid:cssv('--grid'),card:cssv('--card'),line:cssv('--line')};}
+function dk(hex,f){hex=hex.replace('#','');const n=parseInt(hex,16),m=v=>Math.round(v*(1-f)).toString(16).padStart(2,'0');return '#'+m(n>>16&255)+m(n>>8&255)+m(n&255);}
+function rgba(hex,a){hex=String(hex).replace('#','');if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');const n=parseInt(hex,16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
+const EMOJI='"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Twemoji Mozilla",sans-serif';
+const MONO=getComputedStyle(document.documentElement).getPropertyValue('--mono')||'monospace';
+
+/* ============ Zeichnen ============ */
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const ease=q=>q<.5?2*q*q:1-Math.pow(-2*q+2,2)/2;
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+function colr(k,ac){if(k==='a')return ac;if(PAL[k])return PAL[k];return(k[0]==='#'&&document.documentElement.dataset.theme==='light')?dk(k,.32):k;}
+function arrowHead(c,x1,y1,x2,y2,s){const an=Math.atan2(y2-y1,x2-x1);c.beginPath();c.moveTo(x2,y2);c.lineTo(x2-s*Math.cos(an-.45),y2-s*Math.sin(an-.45));c.lineTo(x2-s*Math.cos(an+.45),y2-s*Math.sin(an+.45));c.closePath();c.fill();}
+
+function drawItem(c,it,q,ac){
+ if(it.st)q=1;
+ if(q<=0)return;
+ const col=colr(it.c||'a',ac);
+ let ox=0,oy=0;
+ if(it.f){ox=(it.f[0]-it.x)*(1-q);oy=(it.f[1]-it.y)*(1-q);}
+ c.save();
+ c.globalAlpha=it.f?Math.min(1,q*3):q;
+ c.translate(ox,oy);
+ switch(it.t){
+ case 'emo':{const s=it.f?1:(.55+.45*q);c.translate(it.x,it.y);c.scale(s,s);c.font=`${it.s}px ${EMOJI}`;c.textAlign='center';c.textBaseline='middle';c.fillStyle=PAL.txt;c.fillText(it.ch,0,it.s*.06);break;}
+ case 'pill':{c.font=`700 10px ${MONO}`;const w=c.measureText(it.tx).width+18,h=19;c.translate(it.x,it.y);const s=.8+.2*q;c.scale(s,s);rr(c,-w/2,-h/2,w,h,9.5);c.fillStyle=PAL.cv;c.fill();c.fillStyle=rgba(col,.16);c.fill();c.lineWidth=1.2;c.strokeStyle=col;c.stroke();c.fillStyle=col;c.textAlign='center';c.textBaseline='middle';c.fillText(it.tx,0,.5);break;}
+ case 'arr':{const x2=it.x1+(it.x2-it.x1)*q,y2=it.y1+(it.y2-it.y1)*q;c.strokeStyle=col;c.fillStyle=col;c.lineWidth=2;c.lineCap='round';if(it.dash)c.setLineDash([5,5]);c.beginPath();c.moveTo(it.x1,it.y1);c.lineTo(x2,y2);c.stroke();c.setLineDash([]);if(q>.85){arrowHead(c,it.x1,it.y1,x2,y2,8);if(it.bi)arrowHead(c,it.x2,it.y2,it.x1,it.y1,8);}break;}
+ case 'txt':{c.font=`${it.b?700:500} ${it.s}px ${it.b?MONO:'system-ui,sans-serif'}`;c.fillStyle=col;c.textAlign=it.al||'center';c.textBaseline='middle';c.fillText(it.tx,it.x,it.y+(1-q)*6);break;}
+ case 'box':{rr(c,it.x,it.y,it.w,it.h,Math.min(8,it.h/2.5,it.w/2.5));c.fillStyle=rgba(col,it.fa||.1);c.fill();c.lineWidth=1.4;c.strokeStyle=col;c.stroke();if(it.tx){c.font=`700 9.5px ${MONO}`;c.fillStyle=col;c.textAlign='center';c.textBaseline='top';c.fillText(it.tx,it.x+it.w/2,it.y+6);}break;}
+ case 'bar':{const h=it.h*q;rr(c,it.x,it.y-h,it.w,Math.max(h,1),4);c.fillStyle=rgba(col,.75);c.fill();c.strokeStyle=col;c.lineWidth=1.2;c.stroke();
+  c.textAlign='center';c.textBaseline='bottom';c.font=`800 12px ${MONO}`;c.fillStyle=col;if(q>.5)c.fillText(it.top,it.x+it.w/2,it.y-h-5);
+  c.textBaseline='top';c.font=`600 10px ${MONO}`;c.fillStyle=PAL.mut;c.fillText(it.bot,it.x+it.w/2,it.y+5);
+  c.strokeStyle=PAL.mut;c.globalAlpha*=.5;c.beginPath();c.moveTo(it.x-12,it.y);c.lineTo(it.x+it.w+12,it.y);c.stroke();break;}
+ case 'x':{const s=it.s*q;c.strokeStyle=PAL.red;c.lineWidth=4;c.lineCap='round';c.beginPath();c.moveTo(it.x-s,it.y-s);c.lineTo(it.x+s,it.y+s);c.moveTo(it.x+s,it.y-s);c.lineTo(it.x-s,it.y+s);c.stroke();break;}
+ case 'chk':{const s=it.s;c.translate(it.x,it.y);c.beginPath();c.arc(0,0,s,0,7);c.fillStyle=rgba(PAL.green,.18);c.fill();c.strokeStyle=PAL.green;c.lineWidth=2;c.stroke();c.lineWidth=3.5;c.lineCap='round';c.beginPath();c.moveTo(-s*.45,0);c.lineTo(-s*.1,s*.38);c.lineTo(s*.5,-s*.38);c.stroke();break;}
+ case 'line':{const pts=it.pts,n=pts.length-1,tot=q*n;c.strokeStyle=col;c.lineWidth=it.w||2.6;if(it.dash)c.setLineDash([5,4]);c.lineJoin='round';c.lineCap='round';c.beginPath();c.moveTo(pts[0][0],pts[0][1]);
+  for(let k=1;k<=n;k++){if(tot>=k)c.lineTo(pts[k][0],pts[k][1]);else{const f=tot-(k-1);if(f>0)c.lineTo(pts[k-1][0]+(pts[k][0]-pts[k-1][0])*f,pts[k-1][1]+(pts[k][1]-pts[k-1][1])*f);break;}}c.stroke();c.setLineDash([]);break;}
+ /* ---- Geräte ---- */
+ case 'wave':{const x2=it.x1+(it.x2-it.x1)*q;c.strokeStyle=col;c.lineWidth=it.w||2.4;c.lineJoin='round';c.lineCap='round';c.beginPath();let ph=0;
+  for(let x=it.x1;x<=x2+.01;x+=1){const y=it.y-it.amp*Math.sin(ph);x===it.x1?c.moveTo(x,y):c.lineTo(x,y);ph+=2*Math.PI/it.len;}
+  c.stroke();break;}
+ case 'rad':{c.strokeStyle=col;c.lineWidth=it.w||2.2;c.lineCap='round';const base=c.globalAlpha;
+  for(let i=0;i<it.n;i++){const qq=clamp(q*it.n*1.15-i,0,1);if(qq<=0)break;c.globalAlpha=base*qq*(1-.45*i/it.n);c.beginPath();c.arc(it.x,it.y,it.gap*(i+1),it.a0*Math.PI/180,it.a1*Math.PI/180);c.stroke();}
+  break;}
+ case 'phone':{const s=it.s,ld=it.land,w=(ld?50:26)*s,h=(ld?26:50)*s,sc=it.f?1:(.75+.25*q);c.translate(it.x,it.y);c.scale(sc,sc);
+  rr(c,-w/2,-h/2,w,h,5*s);c.fillStyle=PAL.card;c.fill();c.lineWidth=1.6;c.strokeStyle=PAL.txt;c.stroke();
+  const m=2.2*s;rr(c,-w/2+m,-h/2+m,w-2*m,h-2*m,3.5*s);c.fillStyle=rgba(col,.22);c.fill();
+  c.fillStyle=PAL.txt;c.beginPath();if(ld)c.arc(-w/2+m+2.6*s,0,1.1*s,0,7);else c.arc(0,-h/2+m+2.6*s,1.1*s,0,7);c.fill();break;}
+ case 'tablet':{const s=it.s,ld=it.land,w=(ld?80:56)*s,h=(ld?56:80)*s,sc=it.f?1:(.8+.2*q);c.translate(it.x,it.y);c.scale(sc,sc);
+  rr(c,-w/2,-h/2,w,h,5*s);c.fillStyle=PAL.card;c.fill();c.lineWidth=1.6;c.strokeStyle=PAL.txt;c.stroke();
+  const m=4*s;rr(c,-w/2+m,-h/2+m,w-2*m,h-2*m,2*s);c.fillStyle=rgba(col,.2);c.fill();
+  c.fillStyle=PAL.txt;c.beginPath();if(ld)c.arc(-w/2+2*s,0,.9*s,0,7);else c.arc(0,-h/2+2*s,.9*s,0,7);c.fill();break;}
+ case 'laptop':{const s=it.s,w=96*s,h=60*s,sc=it.f?1:(.85+.15*q);c.translate(it.x,it.y);c.scale(sc,sc);
+  rr(c,-w/2,-h,w,h,4*s);c.fillStyle=PAL.card;c.fill();c.lineWidth=1.6;c.strokeStyle=PAL.txt;c.stroke();
+  const m=4*s;rr(c,-w/2+m,-h+m,w-2*m,h-2*m,1.5*s);c.fillStyle=rgba(col,.2);c.fill();
+  c.beginPath();c.moveTo(-w/2-6*s,8*s);c.lineTo(w/2+6*s,8*s);c.lineTo(w/2,0);c.lineTo(-w/2,0);c.closePath();c.fillStyle=PAL.card;c.fill();c.stroke();
+  c.fillStyle=PAL.mut;rr(c,-12*s,3*s,24*s,3*s,1*s);c.fill();break;}
+ case 'watch':{const s=it.s,w=34*s,h=40*s,sc=.8+.2*q;c.translate(it.x,it.y);c.scale(sc,sc);
+  c.fillStyle=PAL.mut;rr(c,-w*.32,-h/2-20*s,w*.64,22*s,4*s);c.fill();rr(c,-w*.32,h/2-2*s,w*.64,22*s,4*s);c.fill();
+  rr(c,-w/2,-h/2,w,h,9*s);c.fillStyle=PAL.card;c.fill();c.lineWidth=1.8;c.strokeStyle=PAL.txt;c.stroke();
+  rr(c,-w/2+3*s,-h/2+3*s,w-6*s,h-6*s,7*s);c.fillStyle=rgba(col,.2);c.fill();
+  c.fillStyle=col;c.font=`700 ${8.5*s}px ${MONO}`;c.textAlign='center';c.textBaseline='middle';c.fillText('10:09',0,1);
+  c.fillStyle=PAL.txt;rr(c,w/2-.5,-5*s,2.6*s,10*s,1*s);c.fill();break;}
+ case 'chip':{const w=it.w,h=it.h;c.translate(it.x,it.y);c.strokeStyle=col;c.lineWidth=1.4;
+  const np=Math.max(3,Math.round(w/14)),nq=Math.max(2,Math.round(h/14));c.beginPath();
+  for(let i=0;i<np;i++){const x=-w/2+w*(i+.5)/np;c.moveTo(x,-h/2);c.lineTo(x,-h/2-6);c.moveTo(x,h/2);c.lineTo(x,h/2+6);}
+  for(let i=0;i<nq;i++){const y=-h/2+h*(i+.5)/nq;c.moveTo(-w/2,y);c.lineTo(-w/2-6,y);c.moveTo(w/2,y);c.lineTo(w/2+6,y);}c.stroke();
+  rr(c,-w/2,-h/2,w,h,5);c.fillStyle=PAL.card;c.fill();c.fillStyle=rgba(col,.18);c.fill();c.lineWidth=1.6;c.stroke();
+  if(it.tx){c.font=`800 ${Math.min(18,h*.32)}px ${MONO}`;c.fillStyle=col;c.textAlign='center';c.textBaseline='middle';c.fillText(it.tx,0,1);}break;}
+ case 'bat':{const w=it.w,h=it.h,lv=it.lv*q;c.translate(it.x,it.y);
+  rr(c,-w/2,-h/2,w,h,7);c.fillStyle=PAL.card;c.fill();c.lineWidth=2;c.strokeStyle=PAL.txt;c.stroke();
+  c.fillStyle=PAL.txt;rr(c,w/2+2,-h*.18,5,h*.36,2);c.fill();
+  const fc=lv>.5?PAL.green:lv>.2?PAL.gold:PAL.red;rr(c,-w/2+5,-h/2+5,Math.max(1,(w-10)*lv),h-10,4);c.fillStyle=rgba(fc,.85);c.fill();
+  c.font=`800 ${Math.min(17,h*.36)}px ${MONO}`;c.fillStyle=PAL.txt;c.textAlign='center';c.textBaseline='middle';c.fillText(Math.round(lv*100)+' %',0,1);break;}
+ case 'rgb':{const s=it.s,on=it.on,cols=['#ef4444','#22c55e','#3b82f6'],tw=3*s+8;c.translate(it.x-tw/2,it.y);
+  for(let k=0;k<3;k++){rr(c,k*(s+4),0,s,3*s,4);c.fillStyle=rgba(cols[k],on[k]?.9:.1);c.fill();c.strokeStyle=cols[k];c.lineWidth=1.4;c.stroke();}break;}
+ case 'cap':{const r=it.r;c.translate(it.x,it.y);c.beginPath();c.arc(0,0,r,0,7);c.fillStyle=PAL.card;c.fill();c.strokeStyle=PAL.mut;c.lineWidth=1.4;c.stroke();
+  const top=it.up==='w'?'#f4f4f5':'#18181b',bot=it.up==='w'?'#18181b':'#f4f4f5';
+  [[-.38,-.48],[0,-.58],[.38,-.48],[-.2,-.22],[.2,-.22]].forEach(([dx,dy])=>{c.beginPath();c.arc(dx*r,dy*r,r*.17,0,7);c.fillStyle=top;c.fill();c.strokeStyle=PAL.mut;c.lineWidth=.7;c.stroke();
+   c.beginPath();c.arc(dx*r,-dy*r,r*.17,0,7);c.fillStyle=bot;c.fill();c.stroke();});
+  c.strokeStyle=rgba(PAL.mut,.6);c.setLineDash([3,3]);c.beginPath();c.moveTo(-r,0);c.lineTo(r,0);c.stroke();c.setLineDash([]);break;}
+ case 'dot':{c.beginPath();c.arc(it.x,it.y,it.r*(it.f?1:(.5+.5*q)),0,7);c.fillStyle=col;c.fill();break;}
+ }
+ c.restore();
+}
+function sceneAt(les,si,p){
+ let start=0;for(let j=si;j>=0;j--){if(les.steps[j].clear){start=j;break;}}
+ const out=[];
+ for(let j=start;j<=si;j++){const add=les.steps[j].add,n=add.length;
+  add.forEach((it,i)=>{let q=1;if(j===si){const st=n>1?i/n*.55:0;q=clamp((p-st)/.3,0,1);}out.push([it,ease(q)]);});}
+ return out;
+}
+function paint(cv,les,si,p){
+ const dpr=Math.min(3,window.devicePixelRatio||1),w=cv.clientWidth||400,h=w*240/400;
+ if(cv.width!==Math.round(w*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);}
+ const c=cv.getContext('2d'),k=cv.width/400;
+ c.setTransform(1,0,0,1,0,0);c.fillStyle=PAL.cv;c.fillRect(0,0,cv.width,cv.height);
+ c.setTransform(k,0,0,k,0,0);
+ c.strokeStyle=PAL.grid;c.lineWidth=1;c.beginPath();for(let x=20;x<400;x+=20){c.moveTo(x,0);c.lineTo(x,240);}for(let y=20;y<240;y+=20){c.moveTo(0,y);c.lineTo(400,y);}c.stroke();
+ let ac=areaOf(les.a).col;if(document.documentElement.dataset.theme==='light')ac=dk(ac,.32);
+ const items=sceneAt(les,si,p);
+ for(const [it,q] of items)if(it.t!=='pill')drawItem(c,it,q,ac);
+ for(const [it,q] of items)if(it.t==='pill')drawItem(c,it,q,ac);
+}
+
+/* ============ Thema ============ */
+const TKEY='geraeteschule-theme';
+let mode='dark';try{mode=localStorage.getItem(TKEY)||'dark';}catch(e){}
+const mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+function applyTheme(){
+ const act=mode==='auto'?(mq&&mq.matches?'dark':'light'):mode;
+ document.documentElement.dataset.theme=act;
+ document.querySelector('meta[name=theme-color]').content=act==='dark'?'#070b10':'#eef2f6';
+ document.querySelectorAll('#theme button').forEach(b=>b.classList.toggle('on',b.dataset.m===mode));
+ readPal();redraw();
+}
+document.getElementById('theme').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.m;try{localStorage.setItem(TKEY,mode);}catch(_){}applyTheme();});
+if(mq&&mq.addEventListener)mq.addEventListener('change',()=>{if(mode==='auto')applyTheme();});
+let redrawHooks=[];function redraw(){redrawHooks.forEach(f=>f());}
+window.addEventListener('resize',redraw);
+
+/* ============ Player ============ */
+const STEP=4200;
+let PL=null,raf=0;
+function stopPlayer(){if(raf)cancelAnimationFrame(raf);raf=0;PL=null;}
+function setupPlayer(les){
+ const cv=document.getElementById('cv'),n=les.steps.length,total=n*STEP;
+ PL={les,t:0,playing:true,speed:1,last:0};
+ const $=id=>document.getElementById(id);
+ const ui=()=>{
+  if(!PL)return;
+  const si=Math.min(n-1,Math.floor(PL.t/STEP)),p=PL.t>=total?1:clamp((PL.t-si*STEP)/STEP,0,1);
+  paint(cv,les,si,p);
+  $('sn').textContent=`SCHRITT ${si+1} / ${n}`;$('say').textContent=les.steps[si].say;
+  $('rg').value=Math.round(PL.t/total*1000);
+  const sec=x=>{x=Math.floor(x/1000);return Math.floor(x/60)+':'+String(x%60).padStart(2,'0');};
+  $('tm').textContent=sec(PL.t)+' / '+sec(total);
+  $('pb').textContent=PL.playing?'❚❚':(PL.t>=total?'↻':'▶');
+  document.querySelectorAll('#steps .sbtn').forEach((b,i)=>b.classList.toggle('on',i===si));
+  if(si===n-1&&p>.6&&!ST.seen[les.id]){ST.seen[les.id]=1;save();renderSide();}
+ };
+ const loop=ts=>{if(!PL)return;if(!PL.last)PL.last=ts;const dt=Math.min(100,ts-PL.last);PL.last=ts;
+  if(PL.playing){PL.t+=dt*PL.speed;if(PL.t>=total){PL.t=total;PL.playing=false;}}
+  ui();raf=PL.playing?requestAnimationFrame(loop):0;};
+ const play=()=>{if(!PL)return;if(PL.t>=total)PL.t=0;PL.playing=true;PL.last=0;if(!raf)raf=requestAnimationFrame(loop);};
+ const pause=()=>{PL.playing=false;ui();};
+ $('pb').onclick=()=>PL.playing?pause():play();
+ cv.onclick=()=>PL.playing?pause():play();
+ $('rs').onclick=()=>{PL.t=0;play();};
+ $('rg').oninput=e=>{PL.t=e.target.value/1000*total;if(!PL.playing)ui();};
+ document.querySelectorAll('#spd .sbtn').forEach(b=>b.onclick=()=>{PL.speed=+b.dataset.s;document.querySelectorAll('#spd .sbtn').forEach(x=>x.classList.toggle('on',x===b));});
+ document.querySelectorAll('#steps .sbtn').forEach((b,i)=>b.onclick=()=>{PL.t=i*STEP;play();});
+ redrawHooks=[ui];
+ raf=requestAnimationFrame(loop);
+}
+
+/* ============ Seitenleiste ============ */
+let q='';
+function renderSide(){
+ const el=document.getElementById('side');if(!el)return;
+ const cur=(location.hash.match(/#l-([\w-]+)/)||[])[1];
+ const ql=q.toLowerCase();
+ let h=`<input class="search" id="srch" placeholder="🔍 Lektion suchen …" value="${q.replace(/"/g,'&quot;')}">`;
+ for(const a of AREAS){
+  const ls=lessonsOf(a.id).filter(l=>!ql||(l.t+' '+l.steps.map(s=>s.say).join(' ')+' '+Object.values(l.info).join(' ')).toLowerCase().includes(ql));
+  if(!ls.length)continue;
+  h+=`<div class="sgrp" style="--ac:${a.col}"><h4>${a.icon} ${a.name.toUpperCase()}</h4>`+ls.map(l=>`<a href="#l-${l.id}" class="${l.id===cur?'act':''}">${l.t}${ST.seen[l.id]?'<span class="ck">✓</span>':''}</a>`).join('')+`</div>`;
+ }
+ h+=`<a class="sq" href="#quiz" style="color:${QUIZCOL};border-color:${QUIZCOL}">🎯 QUIZ STARTEN · BESTWERT ${ST.best}/10</a>`;
+ const had=document.activeElement&&document.activeElement.id==='srch',pos=had?document.activeElement.selectionStart:0;
+ el.innerHTML=h;
+ const s=document.getElementById('srch');s.oninput=e=>{q=e.target.value;renderSide();};
+ if(had){s.focus();s.setSelectionRange(pos,pos);}
+}
+
+/* ============ Ansichten ============ */
+const M=document.getElementById('main');
+function vHome(){
+ const seen=L.filter(l=>ST.seen[l.id]).length;
+ let h=`<section class="hero"><div class="kicker">BAYAZIT · LERN-APP · ${L.length} LEKTIONEN</div><h1>Geräte <span>verstehen</span></h1><p>Wie Smartphone, Tablet, Laptop, Smartwatch &amp; Co. funktionieren, was in ihnen steckt und worauf du beim Kaufen, Pflegen und Schützen achten solltest – in kleinen Videos erklärt.</p>
+ <div class="chips"><span class="chip">FORTSCHRITT <b>${seen}/${L.length}</b></span><span class="chip">QUIZ-BESTWERT <b>${ST.best}/10</b></span><span class="chip">VOM <b>HANDY BIS ZUM PC</b></span></div></section><div class="bento">`;
+ AREAS.forEach((a,i)=>{const ls=lessonsOf(a.id),d=ls.filter(l=>ST.seen[l.id]).length;
+  h+=`<a class="tile" href="#b-${a.id}" style="--ac:${a.col}"><div class="ti-top"><span class="ti-ico">${a.icon}</span><span class="ti-num">0${i+1}</span></div><h2>${a.name.toUpperCase()}</h2><p>${a.desc}</p><div class="prog"><i style="width:${d/ls.length*100}%"></i></div><div class="ti-foot">${d}/${ls.length} LEKTIONEN</div></a>`;});
+ h+=`<a class="tile qz" href="#quiz" style="--ac:${QUIZCOL}"><div class="ti-top"><span class="ti-ico">🎯</span><span class="ti-num">QUIZ</span></div><h2>QUIZ</h2><p>10 zufällige Fragen: Bilder, Wissen und Rechenaufgaben.</p><div class="prog"><i style="width:${ST.best*10}%"></i></div><div class="ti-foot">BESTWERT ${ST.best}/10</div></a></div>`;
+ h+=`<div class="foot">📱 BAYAZIT GERÄTE-SCHULE · KOMPASS DARK<br><span style="opacity:.75;letter-spacing:0">Alle Angaben ohne Gewähr · Stand 2026</span></div>`;
+ M.innerHTML=h;
+}
+function vArea(aid){
+ const a=areaOf(aid);if(!a)return vHome();
+ const ls=lessonsOf(aid),d=ls.filter(l=>ST.seen[l.id]).length;
+ M.innerHTML=`<a class="back" href="#home">← Startseite</a><div class="ahead" style="--ac:${a.col}"><span class="ti-ico">${a.icon}</span><h1>${a.name.toUpperCase()}</h1><p>${a.desc}</p><div class="prog"><i style="width:${d/ls.length*100}%"></i></div><div class="ti-foot">${d}/${ls.length} LEKTIONEN GESEHEN</div></div>
+ <div class="lgrid" style="--ac:${a.col}">${ls.map((l,i)=>`<a class="lcard" href="#l-${l.id}"><span class="lk">LEKTION ${i+1}</span><b>${l.t}</b><span class="lsub">${l.steps[0].say}</span>${ST.seen[l.id]?'<span class="done">✓</span>':''}</a>`).join('')}</div>`;
+}
+function vLesson(id){
+ const l=byId[id];if(!l)return vHome();
+ const a=areaOf(l.a),ls=lessonsOf(l.a),idx=ls.indexOf(l),prev=L[l.i-1],next=L[l.i+1];
+ M.innerHTML=`<a class="back" href="#b-${a.id}">← ${a.name}</a>
+ <div style="--ac:${a.col}"><div class="meta">LEKTION ${idx+1} · ${a.name.toUpperCase()}</div><h1 class="ltitle">${l.t}</h1>
+ <div class="player"><canvas id="cv" aria-label="Animation: ${l.t}"></canvas>
+  <div class="cap"><div class="sn" id="sn">SCHRITT 1 / ${l.steps.length}</div><p id="say"></p></div>
+  <div class="ctrl"><button class="pbtn" id="pb" aria-label="Abspielen/Pause">▶</button><input type="range" id="rg" min="0" max="1000" value="0" aria-label="Spulen"><span class="tm" id="tm">0:00</span></div>
+  <div class="ctrl2"><span id="spd" style="display:flex;gap:6px"><button class="sbtn" data-s=".5">½×</button><button class="sbtn on" data-s="1">1×</button><button class="sbtn" data-s="2">2×</button></span><button class="sbtn" id="rs" title="Neustart">⟲</button><span class="gap"></span><span id="steps" style="display:flex;gap:6px;flex-wrap:wrap">${l.steps.map((_,i)=>`<button class="sbtn">${i+1}</button>`).join('')}</span></div>
+ </div>
+ <div class="info">
+  <div class="ibox" style="--c:var(--blue)"><h3>WAS IST DAS?</h3><p>${l.info.was}</p></div>
+  <div class="ibox" style="--c:var(--green)"><h3>SO ERKENNST DU ES · SO GEHT’S</h3><p>${l.info.so}</p></div>
+  <div class="ibox" style="--c:var(--gold)"><h3>WAS BEDEUTET ES?</h3><p>${l.info.bed}</p></div>
+  <div class="ibox" style="--c:var(--red)"><h3>TIPP</h3><p>${l.info.tipp}</p></div>
+ </div>
+ <div class="lnav"><a href="${prev?'#l-'+prev.id:'#'}" class="${prev?'':'dis'}"><small>← ZURÜCK</small>${prev?prev.t:'–'}</a><a class="nx ${next?'':'dis'}" href="${next?'#l-'+next.id:'#'}"><small>WEITER →</small>${next?next.t:'–'}</a></div></div>`;
+ setupPlayer(l);
+}
+
+/* ============ Quiz ============ */
+const KQ=[
+ ['Wie viele Unterpixel hat ein Bildpunkt auf einem Display?',['Drei: Rot, Grün und Blau','Einen','Zwei: Schwarz und Weiß','Sieben in Regenbogenfarben'],'display','Aus Rot, Grün und Blau lässt sich jede Farbe mischen.'],
+ ['Was ergeben Rot und Grün zusammen auf einem Display?',['Gelb','Lila','Braun','Schwarz'],'display','Licht mischt sich anders als Malfarbe: Rot + Grün = Gelb.'],
+ ['Warum zeigt ein OLED-Display echtes Schwarz?',['Weil schwarze Pixel einfach ausgeschaltet sind','Weil es eine schwarze Folie hat','Weil die Hintergrundbeleuchtung stärker ist','Weil es nur Schwarz-Weiß kann'],'display','Bei OLED leuchtet jeder Pixel selbst – oder eben gar nicht.'],
+ ['Was bedeutet 120 Hz beim Display?',['Das Bild wird 120-mal pro Sekunde neu gezeichnet','Der Bildschirm ist 120 mm groß','Der Akku hält 120 Stunden','Es gibt 120 Farben'],'display','Mehr Hertz = flüssigeres Scrollen.'],
+ ['Warum funktioniert ein normaler Handschuh nicht am Touchscreen?',['Weil Stoff keinen Strom leitet','Weil er zu warm ist','Weil der Touchscreen Druck braucht','Weil Handschuhe zu dick sind'],'touch','Kapazitive Touchscreens brauchen etwas Leitfähiges wie den Finger.'],
+ ['Wie heißt die Technik der meisten Touchscreens?',['Kapazitiv','Magnetisch','Optisch mit Kamera','Mechanisch'],'touch','Ein Gitter misst die Veränderung des elektrischen Feldes.'],
+ ['Was bedeutet „50 Megapixel“ bei einer Kamera?',['Der Sensor hat 50 Millionen Bildpunkte','Die Kamera zoomt 50-fach','Ein Foto ist 50 MB groß','Die Kamera hat 50 Linsen'],'kamera','Mega = Million.'],
+ ['Was passiert beim digitalen Zoom?',['Das Bild wird nur ausgeschnitten und unschärfer','Eine eigene Tele-Linse fährt aus','Das Handy fliegt näher heran','Es werden mehr Pixel aufgenommen'],'kamera','Nur der optische Zoom mit Tele-Linse bleibt scharf.'],
+ ['Wie gelingen Nachtfotos mit dem Handy?',['Viele Aufnahmen werden zu einem Bild verrechnet','Das Handy hat ein Nachtsichtgerät','Der Blitz ist immer an','Nur mit Stativ und Kabel'],'kamera','Das nennt man computergestützte Fotografie.'],
+ ['Welcher Sensor schaltet beim Telefonieren das Display aus?',['Der Näherungssensor','Das Barometer','Der Fingerabdrucksensor','Das GPS'],'sensoren','Er merkt, dass das Ohr nah am Display ist.'],
+ ['Welche Sensoren ergeben zusammen den Kompass?',['Gyroskop und Magnetsensor','Kamera und Mikrofon','Akku und Lautsprecher','Barometer und Helligkeitssensor'],'sensoren','Der Magnetsensor misst das Erdmagnetfeld.'],
+ ['Was misst ein Barometer im Handy?',['Den Luftdruck – daraus die Höhe','Den Puls','Die Lautstärke','Die Temperatur des Akkus'],'sensoren','So erkennt das Handy z. B. Treppensteigen.'],
+ ['Wie viele Zentimeter sind 1 Zoll?',['2,54 cm','1 cm','10 cm','3,14 cm'],'tablet','Die Bildschirmdiagonale wird in Zoll angegeben.'],
+ ['Was wird bei Bildschirmen in Zoll gemessen?',['Die Diagonale von Ecke zu Ecke','Die Breite','Die Höhe','Die Dicke'],'tablet','Gemessen wird die sichtbare Diagonale.'],
+ ['Seit wann müssen neue Laptops in der EU per USB-C ladbar sein?',['Seit dem 28. April 2026','Seit 2010','Seit Juni 2025','Erst ab 2030'],'laptop','Handys, Tablets und Kopfhörer schon seit Ende 2024.'],
+ ['Wie viel Arbeitsspeicher gilt bei Laptops heute als guter Standard?',['16 GB','2 GB','512 GB','1 TB'],'laptop','Mit 16 GB laufen auch viele Programme gleichzeitig flüssig.'],
+ ['Was zeichnet ein Convertible aus?',['Das Scharnier lässt sich um 360 Grad drehen','Es hat keinen Bildschirm','Es läuft nur mit Strom aus der Steckdose','Es hat zwei Akkus'],'zweiin1','Bildschirm nach hinten klappen = Tablet.'],
+ ['Was ist ein Detachable?',['Ein 2-in-1 mit abnehmbarer Tastatur','Ein PC ohne Gehäuse','Ein Handy mit Tastatur','Ein Monitor mit Lautsprechern'],'zweiin1','Ohne Tastatur ist es ein Tablet.'],
+ ['Was ist der größte Vorteil eines Tower-PCs?',['Er ist leistungsstark und aufrüstbar','Er ist besonders leicht','Er hat einen eingebauten Akku','Er braucht keinen Bildschirm'],'pc','Im großen Gehäuse ist Platz für starke Bauteile.'],
+ ['Wo steckt beim All-in-One-PC die Technik?',['Im Bildschirm','In der Tastatur','In der Maus','Im Netzstecker'],'pc','Das spart Platz und Kabel.'],
+ ['Wann braucht ein E-Ink-Display Strom?',['Nur beim Umblättern','Immer gleich viel','Nur nachts','Nie'],'ereader','Darum hält der Akku mehrere Wochen.'],
+ ['Was steckt in den Mikrokapseln eines E-Ink-Displays?',['Schwarze und weiße Teilchen','Flüssiges Glas','Kleine LEDs','Luftblasen'],'ereader','Spannung zieht die weißen oder schwarzen Teilchen nach oben.'],
+ ['Wofür steht SoC?',['System on a Chip','Super optischer Chip','Speicher ohne Cache','Smartphone of China'],'soc','Fast alles sitzt auf einem einzigen Chip.'],
+ ['Wofür ist die NPU im Chip zuständig?',['Für künstliche Intelligenz','Für den Lautsprecher','Für das Laden','Für die SIM-Karte'],'soc','NPU = Neural Processing Unit.'],
+ ['Warum haben moderne Chips Effizienzkerne?',['Um bei leichten Aufgaben Akku zu sparen','Um schneller zu laden','Um Fotos zu machen','Damit das Handy leichter wird'],'soc','Starke Kerne nur dann, wenn sie gebraucht werden.'],
+ ['Was passiert mit dem Inhalt des RAM, wenn der Strom weg ist?',['Er geht verloren','Er bleibt für immer','Er wandert in die Cloud','Er wird ausgedruckt'],'ram','RAM ist ein flüchtiger Speicher.'],
+ ['Womit vergleicht man den Arbeitsspeicher gern?',['Mit einem Schreibtisch','Mit einem Kühlschrank','Mit einem Briefkasten','Mit einer Batterie'],'ram','Der Speicher ist dann der Aktenschrank.'],
+ ['Was ist der Vorteil einer SSD gegenüber einer HDD?',['Viel schneller, leiser und stoßfester','Sie dreht sich schneller','Sie braucht mehr Strom','Sie ist größer'],'speicher','Eine SSD hat keine beweglichen Teile.'],
+ ['Wie viele Gigabyte sind 1 Terabyte?',['1.000 GB','100 GB','10 GB','1.000.000 GB'],'speicher','Tera = tausendmal Giga.'],
+ ['Warum hast du von 128 GB nicht alles frei?',['Das Betriebssystem belegt einen Teil','Der Hersteller hält Platz zurück','Die SIM-Karte braucht Platz','Wegen der Hülle'],'speicher','Oft bleiben rund 100 bis 115 GB frei.'],
+ ['Welche Akkus stecken in fast allen Handys und Laptops?',['Lithium-Ionen-Akkus','Bleiakkus','Nickel-Cadmium-Akkus','Zink-Kohle-Batterien'],'akku','Sie sind leicht und speichern viel Energie.'],
+ ['Was ist ein Warnzeichen für einen gefährlichen Akku?',['Er bläht sich auf, das Gehäuse wölbt sich','Er ist zu 80 % geladen','Er lädt kabellos','Er hat 5.000 mAh'],'akku','Dann nicht mehr laden und zur Reparatur bringen.'],
+ ['Wie berechnet man die Leistung in Watt?',['Volt × Ampere','Volt + Ampere','Ampere ÷ Volt','Volt × Stunden'],'laden','Beispiel: 9 V × 3 A = 27 W.'],
+ ['Warum dauern die letzten Prozent beim Laden am längsten?',['Der Strom wird gedrosselt, um den Akku zu schonen','Das Kabel wird warm','Das Netz ist überlastet','Der Akku ist dann leer'],'laden','Ab etwa 80 % lädt das Gerät langsamer.'],
+ ['Ist ein stärkeres USB-C-Netzteil gefährlich für das Handy?',['Nein, das Gerät nimmt sich nur so viel, wie es verträgt','Ja, das Handy explodiert','Ja, der Akku wird sofort kaputt','Nur nachts'],'laden','Der Ladechip im Gerät regelt den Strom.'],
+ ['Wie misst eine Smartwatch den Puls?',['Mit grünem Licht und einem Lichtsensor','Mit einem Mikrofon','Mit Ultraschall','Über das Display'],'watch','Das zurückkommende Licht verrät den Herzschlag.'],
+ ['Mit welchem Handy funktioniert eine Apple Watch?',['Nur mit dem iPhone','Mit jedem Android-Handy','Nur mit Samsung','Ganz ohne Handy-Einrichtung'],'watch','Die Apple Watch ist an das iPhone gebunden.'],
+ ['Sind Fitness-Tracker Medizingeräte?',['Nein, sie liefern nur Schätzungen','Ja, immer','Nur der Smart Ring','Nur nachts'],'tracker','Bei Beschwerden zählt immer der Arzt.'],
+ ['Wie funktioniert aktive Geräuschunterdrückung (ANC)?',['Mit einer spiegelverkehrten Gegenwelle','Mit dickerer Watte','Mit lauterer Musik','Mit einem Magnetfeld'],'kopfhoerer','Lärm und Gegenwelle löschen sich fast aus.'],
+ ['Bei welchem Lärm wirkt ANC am besten?',['Bei gleichmäßigem, tiefem Brummen','Bei Vogelgezwitscher','Bei plötzlichem Knallen','Bei Stimmen'],'kopfhoerer','Motoren im Zug oder Flugzeug sind ideal.'],
+ ['Wie viele Pixel hat 4K ungefähr?',['8,3 Millionen','2 Millionen','500.000','100 Millionen'],'tv','3.840 × 2.160 = 8.294.400 Pixel.'],
+ ['Wo steckt man einen Streaming-Stick ein?',['In den HDMI-Anschluss','In die Steckdose direkt','In den Antennenanschluss','In die Fernbedienung'],'tv','Dazu kommt die WLAN-Verbindung.'],
+ ['Was bedeutet FPS bei Spielen?',['Bilder pro Sekunde','Fehler pro Spiel','Freunde pro Server','Festplatten-Speicher'],'konsole','Frames per Second – je mehr, desto flüssiger.'],
+ ['Was braucht man für Cloud-Gaming vor allem?',['Schnelles, stabiles Internet','Eine besonders starke Grafikkarte','Einen großen Akku','Eine Spielkassette'],'konsole','Das Spiel läuft im Rechenzentrum.'],
+ ['Welches Betriebssystem läuft auf dem iPhone?',['iOS','Android','Windows','Linux'],'os','Android läuft auf Handys von Samsung, Google und vielen anderen.'],
+ ['Wann endete der reguläre Support für Windows 10?',['Am 14. Oktober 2025','Am 1. Januar 2020','Er endet nie','Am 28. April 2026'],'os','Danach gibt es keine kostenlosen Sicherheitsupdates mehr.'],
+ ['Was sollte eine Taschenlampen-App nicht dürfen?',['Auf deine Kontakte zugreifen','Das Licht einschalten','Sich öffnen','Den Akku anzeigen'],'apps','Erlaube nur Berechtigungen, die wirklich nötig sind.'],
+ ['Wie lange müssen neue Handys in der EU mindestens Updates bekommen?',['5 Jahre nach Verkaufsende','6 Monate','1 Jahr nach Kauf','Gar nicht'],'updates','So gilt es seit dem 20. Juni 2025.'],
+ ['Warum sind Sicherheitsupdates so wichtig?',['Sie schließen Lücken, die Angreifer ausnutzen','Sie machen das Display heller','Sie laden den Akku','Sie bringen mehr Speicher'],'updates','Ohne Updates wird ein Gerät unsicher.'],
+ ['Wie viel Cloud-Speicher gibt es bei Google kostenlos?',['15 GB','5 GB','1 TB','500 MB'],'cloud','Bei Apple iCloud sind es 5 GB.'],
+ ['Was bedeutet Synchronisation?',['Alle Geräte werden mit der Cloud abgeglichen','Das Handy wird schneller','Der Akku wird geschont','Das Display dreht sich'],'cloud','Ein Foto vom Handy erscheint so auch am Laptop.'],
+ ['Was ist ein Hotspot?',['Das Handy teilt sein Internet per WLAN','Ein heißer Akku','Ein Ladegerät','Eine Smartwatch-Funktion'],'verbinden','Achtung: Das kostet Datenvolumen.'],
+ ['Wie heißt die Samsung-Funktion, um Dateien direkt zu senden?',['Quick Share','AirDrop','Smart TV','Bluetooth Low'],'verbinden','Bei Apple heißt das AirDrop.'],
+ ['Was bedeutet IP68?',['Staubdicht und geschützt beim Untertauchen','68 Stunden Akku','68 Megapixel','Internetprotokoll Version 68'],'label','6 = staubdicht, 8 = Untertauchen.'],
+ ['Was zeigt das EU-Label für Handys außer der Energieklasse?',['Reparierbarkeit, Sturzfestigkeit und Akku-Werte','Den Namen des Verkäufers','Die Farbe des Geräts','Die Zahl der Apps'],'label','Seit Juni 2025 Pflicht für neue Handys und Tablets.'],
+ ['In welchem Ladebereich fühlt sich ein Akku am wohlsten?',['Zwischen etwa 20 und 80 Prozent','Immer bei 100 Prozent','Immer bei 0 Prozent','Zwischen 90 und 100 Prozent'],'akkupflege','Ganz voll und ganz leer stresst den Akku.'],
+ ['Wie heißt bei Samsung die Funktion, die bei 80 % das Laden stoppt?',['Akkuschutz','Turbomodus','Energiesparplan','Flugmodus'],'akkupflege','Einstellungen → Akku → Akkuschutz.'],
+ ['Was schadet einem Akku am meisten?',['Hitze','Kälte im Kühlschrank für 1 Minute','Langsames Laden','Ein USB-C-Kabel'],'akkupflege','Nie in der Sonne oder im heißen Auto liegen lassen.'],
+ ['Was besagt die 3-2-1-Regel?',['3 Kopien, 2 Speicherarten, 1 Kopie außer Haus','3 Handys, 2 Tablets, 1 PC','3 Passwörter, 2 PINs, 1 Fingerabdruck','3 Updates im Jahr'],'schutz','So sind deine Daten gut gesichert.'],
+ ['Was ist Zwei-Faktor-Anmeldung?',['Passwort plus ein zweiter Nachweis, z. B. ein Code','Zwei Passwörter hintereinander','Zwei Handys gleichzeitig','Anmelden zu zweit'],'schutz','Ein gestohlenes Passwort allein reicht dann nicht.'],
+ ['Wie lange müssen Hersteller Ersatzteile für Handys bereithalten?',['7 Jahre','6 Monate','2 Jahre','Gar nicht'],'reparatur','Lieferung innerhalb von 5 bis 10 Arbeitstagen.'],
+ ['Wohin gehört ein altes Handy?',['Zum Wertstoffhof oder in die Rückgabe im Handel','In den Hausmüll','In die Papiertonne','In den Gelben Sack'],'reparatur','Es enthält wertvolle Rohstoffe wie Gold und Kupfer.']
+];
+const rnd=n=>Math.floor(Math.random()*n);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;};
+const fmt=(v,d=0)=>v.toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d});
+const f1=v=>fmt(Math.round(v*10)/10,Math.round(v*10)%10?1:0);
+const uniq=(right,cands)=>{const o=[right];for(const c of cands){if(o.length>=4)break;if(!o.includes(c))o.push(c);}let k=2;while(o.length<4){const v=right+' ('+(k++)+')';if(!o.includes(v))o.push(v);}return o;};
+function calcQ(){
+ const k=rnd(6);
+ if(k===0){const d=[6,6.5,7,10,11,13,15.6,55,65][rnd(9)],r=d*2.54;
+  return{q:`Rechenaufgabe: Wie viele Zentimeter misst die Diagonale eines ${f1(d)}-Zoll-Bildschirms? (1 Zoll = 2,54 cm)`,opts:uniq(f1(r)+' cm',[f1(d*2)+' cm',f1(d*1.5)+' cm',f1(d*3.5)+' cm',f1(d)+' cm']),l:'tablet',exp:`${f1(d)} × 2,54 = ${f1(r)} cm.`};}
+ if(k===1){const m=[4000,4500,5000,6000][rnd(4)],r=m*3.85/1000;
+  return{q:`Rechenaufgabe: Ein Handy-Akku hat ${fmt(m)} mAh bei 3,85 V. Wie viele Wattstunden (Wh) sind das? (mAh × V ÷ 1.000)`,opts:uniq(f1(r)+' Wh',[f1(r*10)+' Wh',f1(r/2)+' Wh',f1(r*2)+' Wh',f1(m/1000)+' Wh']),l:'akku',exp:`${fmt(m)} × 3,85 ÷ 1.000 = ${f1(r)} Wh.`};}
+ if(k===2){const p=[[5,2],[9,2],[9,3],[15,3],[20,3],[20,5]][rnd(6)],r=p[0]*p[1];
+  return{q:`Rechenaufgabe: Ein Netzteil liefert ${p[0]} Volt und ${p[1]} Ampere. Wie viel Watt sind das?`,opts:uniq(r+' W',[(p[0]+p[1])+' W',(r*2)+' W',(r+10)+' W',Math.round(r/2)+' W']),l:'laden',exp:`Watt = Volt × Ampere: ${p[0]} × ${p[1]} = ${r} W.`};}
+ if(k===3){const g=[16,32,64,100][rnd(4)],r=g*1000/4;
+  return{q:`Rechenaufgabe: Auf deinem Handy sind noch ${g} GB frei. Ein Foto braucht etwa 4 MB. Wie viele Fotos passen ungefähr noch drauf? (1 GB = 1.000 MB)`,opts:uniq(fmt(r)+' Fotos',[fmt(r*10)+' Fotos',fmt(r/10)+' Fotos',fmt(g*4)+' Fotos',fmt(r*2)+' Fotos']),l:'speicher',exp:`${fmt(g*1000)} MB ÷ 4 MB = ${fmt(r)} Fotos.`};}
+ if(k===4){const p=[[1280,720,'HD'],[1920,1080,'Full HD'],[2560,1440,'QHD'],[3840,2160,'4K']][rnd(4)],r=p[0]*p[1];
+  return{q:`Rechenaufgabe: Wie viele Pixel hat ein ${p[2]}-Bildschirm mit ${fmt(p[0])} × ${fmt(p[1])} Bildpunkten?`,opts:uniq(fmt(r),[fmt(p[0]+p[1]),fmt(r*2),fmt(r/2),fmt(r*4)]),l:'tv',exp:`${fmt(p[0])} × ${fmt(p[1])} = ${fmt(r)} Pixel.`};}
+ const c=[[40,5],[40,8],[50,10],[60,10],[60,5],[70,10],[50,5]][rnd(7)],r=c[0]/c[1];
+ return{q:`Rechenaufgabe: Ein Laptop-Akku hat ${c[0]} Wh. Der Laptop braucht beim Surfen etwa ${c[1]} Watt. Wie lange hält der Akku ungefähr?`,opts:uniq(f1(r)+' Stunden',[f1(r*2)+' Stunden',f1(r/2)+' Stunden',f1(c[0]*c[1]/10)+' Stunden',f1(r+3)+' Stunden']),l:'akku',exp:`Wattstunden ÷ Watt = Stunden: ${c[0]} ÷ ${c[1]} = ${f1(r)} Stunden.`};
+}
+function picQ(ex){const pool=L.filter(x=>!ex.includes(x.id)),l=pool[rnd(pool.length)],others=shuf(L.filter(x=>x!==l)).slice(0,3);ex.push(l.id);
+ return{pic:l,q:'Bilderfrage: Zu welcher Lektion gehört dieses Bild?',opts:[l.t,...others.map(o=>o.t)],l:l.id,exp:`Das Bild stammt aus der Lektion „${l.t}“.`};}
+let QZ=null;
+function newQuiz(){
+ const ks=shuf(KQ).slice(0,5).map(k=>({q:k[0],opts:k[1],l:k[2],exp:k[3]})),ex=[];
+ const qs=shuf([...ks,picQ(ex),picQ(ex),calcQ(),calcQ(),calcQ()]);
+ qs.forEach(x=>{const right=x.opts[0];x.sh=shuf(x.opts);x.ok=x.sh.indexOf(right);});
+ QZ={qs,i:0,pts:0,wrong:[]};
+}
+function vQuiz(){
+ if(!QZ){M.innerHTML=`<a class="back" href="#home">← Startseite</a><div class="qcard" style="text-align:center"><div style="font-size:52px">🎯</div><h1 class="ltitle" style="margin-top:6px">Geräte-Quiz</h1><p style="color:var(--mut)">10 zufällige Fragen – Bilderfragen, Wissensfragen und Rechenaufgaben.</p><div class="score" style="font-size:20px">BESTWERT ${ST.best}/10</div><button class="big" id="go">QUIZ STARTEN</button></div>`;
+  document.getElementById('go').onclick=()=>{newQuiz();vQuiz();};return;}
+ if(QZ.i>=QZ.qs.length){
+  const nb=QZ.pts>ST.best;if(nb){ST.best=QZ.pts;}ST.runs++;save();renderSide();
+  const rep=[...new Set(QZ.wrong)];
+  M.innerHTML=`<a class="back" href="#home">← Startseite</a><div class="qcard"><div class="qtop"><span>ERGEBNIS</span><span>BESTWERT ${ST.best}/10</span></div><div class="score" style="color:${QZ.pts>=8?'var(--green)':QZ.pts>=5?'var(--gold)':'var(--red)'}">${QZ.pts}/10</div><p style="text-align:center;color:var(--mut)">${nb?'🏆 Neuer Bestwert!':QZ.pts>=8?'Stark – du kennst dich aus!':QZ.pts>=5?'Gut! Mit etwas Wiederholung schaffst du mehr.':'Schau dir die Lektionen noch einmal an.'}</p>
+  ${rep.length?`<div class="rep" style="margin-top:14px"><div class="meta" style="color:var(--mut)">ZUM WIEDERHOLEN</div>${rep.map(id=>`<a href="#l-${id}">▶ ${byId[id].t} <span style="color:var(--mut);font-size:12px">· ${areaOf(byId[id].a).name}</span></a>`).join('')}</div>`:''}
+  <button class="big" id="again">NOCH EINMAL</button></div>`;
+  document.getElementById('again').onclick=()=>{newQuiz();vQuiz();};QZ=null;return;}
+ const x=QZ.qs[QZ.i];
+ M.innerHTML=`<a class="back" href="#home">← Startseite</a><div class="qcard"><div class="qtop"><span>FRAGE ${QZ.i+1} / 10</span><span>PUNKTE ${QZ.pts}</span></div><div class="qbar"><i style="width:${QZ.i*10}%"></i></div>
+ ${x.pic?'<div class="qimg"><canvas id="qcv"></canvas></div>':''}<div class="qq">${x.q}</div><div class="opts">${x.sh.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div id="fb"></div></div>`;
+ if(x.pic){const cv=document.getElementById('qcv'),les=x.pic;const d=()=>paint(cv,les,les.steps.length-1,1);redrawHooks=[d];requestAnimationFrame(d);}
+ M.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+  const i=+b.dataset.i,ok=i===x.ok;
+  M.querySelectorAll('.opt').forEach((o,j)=>{o.disabled=true;if(j===x.ok)o.classList.add('ok');else if(j===i)o.classList.add('no');});
+  if(ok)QZ.pts++;else QZ.wrong.push(x.l);
+  document.getElementById('fb').innerHTML=`<div class="fb"><b style="color:${ok?'var(--green)':'var(--red)'}">${ok?'✓ RICHTIG!':'✗ LEIDER FALSCH'}</b><div style="margin-top:4px">${x.exp}</div><a class="go" href="#l-${x.l}">→ Zur Lektion „${byId[x.l].t}“</a></div><button class="big" id="nx">${QZ.i<9?'NÄCHSTE FRAGE →':'ERGEBNIS ANZEIGEN'}</button>`;
+  document.getElementById('nx').onclick=()=>{QZ.i++;vQuiz();window.scrollTo(0,0);};
+ });
+}
+
+/* ============ Router ============ */
+function route(){
+ stopPlayer();redrawHooks=[];
+ const h=location.hash.replace(/^#/,'')||'home',m=h.match(/^(b|l)-([\w-]+)$/),p=m?[m[1],m[2]]:[h];
+ if(p[0]!=='quiz')QZ=null;
+ if(p[0]==='b')vArea(p[1]);else if(p[0]==='l')vLesson(p[1]);else if(p[0]==='quiz')vQuiz();else vHome();
+ renderSide();window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+readPal();applyTheme();route();
+if('serviceWorker' in navigator&&location.protocol==='https:'&&!/claude|anthropic/.test(location.hostname)){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+</script>
+</body></html>
